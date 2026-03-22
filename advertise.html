@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#3a0b47" />
+    <title>تبلیغات و بسته‌ها — ایرانیو</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="has-app-dock">
+    <a class="skip-link" href="#main">پرش به محتوا</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="logo" href="index.html">
+          <span class="logo__mark" aria-hidden="true">ای</span>
+          <span>ایرانیو</span>
+        </a>
+        <input type="checkbox" id="site-nav-toggle" class="site-nav-cb" />
+        <label for="site-nav-toggle" class="nav-toggle" aria-label="باز و بسته کردن منو">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+        <nav class="nav" id="site-nav" aria-label="اصلی">
+          <ul class="nav__links">
+            <li><a href="index.html">خانه</a></li>
+            <li><a href="listings.html">لیست کسب‌وکارها</a></li>
+            <li><a href="advertise.html" aria-current="page">تبلیغات و بسته‌ها</a></li>
+            <li><a href="dashboard.html">پنل کسب‌وکار</a></li>
+          </ul>
+          <div class="nav__cta">
+            <a class="btn btn--ghost" href="advertise.html#inquiry">ثبت کسب‌وکار</a>
+            <a class="btn btn--primary" href="listings.html">جستجو</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="page-hero">
+        <div class="container">
+          <h1>ابزارهای تبلیغاتی برای دیده شدن در UK</h1>
+          <p>
+            بسته مناسب خود را انتخاب کنید: از لیست ساده تا نمایش ویژه در صفحه اصلی، بنر و اولویت در
+            جستجو. پرداخت آنلاین در فاز بعدی اضافه می‌شود؛ فعلاً از فرم پایین درخواست دهید.
+          </p>
+          <p>
+            قبلاً آگهی دارید؟
+            <a href="dashboard.html">ورود به پنل و ویرایش آگهی</a>
+          </p>
+        </div>
+      </div>
+
+      <section class="section container" aria-labelledby="packages-title">
+        <h2 id="packages-title" class="section__title">مقایسه بسته‌ها</h2>
+        <p class="section__lead">همه بسته‌ها شامل صفحه پروفایل اختصاصی و نمایش در دسته مربوط است.</p>
+
+        <div class="pricing-grid">
+          <div class="price-card">
+            <h2>پایه</h2>
+            <p class="price">از £۱۹ / ماه</p>
+            <ul>
+              <li>لیست استاندارد در نتایج</li>
+              <li>اطلاعات تماس و توضیح کوتاه</li>
+              <li>بدون برچسب ویژه</li>
+            </ul>
+            <button type="button" class="btn btn--ghost btn--block" disabled aria-disabled="true">
+              پرداخت به زودی
+            </button>
+          </div>
+          <div class="price-card price-card--featured">
+            <h2>ویژه</h2>
+            <p class="price">از £۴۹ / ماه</p>
+            <ul>
+              <li>برچسب «ویژه» و استایل برجسته</li>
+              <li>اولویت بالاتر در جستجو</li>
+              <li>نمایش در بلوک «کسب‌وکارهای ویژه» در خانه</li>
+              <li>یک جایگاه بنر میان‌نتایج (دوره آزمایشی)</li>
+            </ul>
+            <a class="btn btn--primary btn--block" href="#inquiry">درخواست این بسته</a>
+          </div>
+          <div class="price-card">
+            <h2>حرفه‌ای</h2>
+            <p class="price">از £۹۹ / ماه</p>
+            <ul>
+              <li>همه امکانات بسته ویژه</li>
+              <li>بنر Leaderboard در صفحه اصلی</li>
+              <li>ستون تبلیغ کنار پروفایل</li>
+              <li>گالری تصویر و چند شعبه (قالب آماده)</li>
+            </ul>
+            <a class="btn btn--accent btn--block" href="#inquiry">درخواست این بسته</a>
+          </div>
+        </div>
+      </section>
+
+      <div class="container">
+        <div class="ad-slot ad-slot--leaderboard" role="complementary" aria-label="نمونه جای بنر">
+          نمونه جای بنر برای مشتریان بسته حرفه‌ای
+        </div>
+      </div>
+
+      <section class="section container" id="inquiry" aria-labelledby="inquiry-title">
+        <div class="form-panel">
+          <h2 id="inquiry-title">درخواست مشاوره یا ثبت آگهی</h2>
+          <p>فرم زیر فقط رابط کاربری است؛ ارسال واقعی بعداً به سرور وصل می‌شود.</p>
+          <form action="#" method="post">
+            <div class="field">
+              <label for="biz-name">نام کسب‌وکار</label>
+              <input type="text" id="biz-name" name="biz_name" autocomplete="organization" required />
+            </div>
+            <div class="field">
+              <label for="contact-name">نام شما</label>
+              <input type="text" id="contact-name" name="contact_name" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="email">ایمیل</label>
+              <input type="email" id="email" name="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="phone">تلفن (UK)</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" />
+            </div>
+            <div class="field">
+              <label for="package">بسته مورد نظر</label>
+              <select id="package" name="package" required>
+                <option value="">انتخاب کنید</option>
+                <option value="basic">پایه</option>
+                <option value="featured">ویژه</option>
+                <option value="pro">حرفه‌ای</option>
+              </select>
+            </div>
+            <div class="field field--block">
+              <label for="message">توضیحات</label>
+              <textarea id="message" name="message" rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--block form-submit">
+              ارسال درخواست (نمونه)
+            </button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__grid">
+        <div>
+          <h2 class="site-footer__title">ایرانیو</h2>
+          <p>فهرست کسب‌وکارهای فارسی‌زبان در بریتانیا؛ برای کاربران و صاحبان کسب‌وکار.</p>
+        </div>
+        <div>
+          <h2 class="site-footer__title">کاربران</h2>
+          <ul>
+            <li><a href="listings.html">جستجوی کسب‌وکار</a></li>
+            <li><a href="index.html">خانه</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2 class="site-footer__title">صاحبان کسب‌وکار</h2>
+          <ul>
+            <li><a href="dashboard.html">پنل و ویرایش آگهی</a></li>
+            <li><a href="advertise.html">بسته‌های تبلیغاتی</a></li>
+            <li><a href="advertise.html#inquiry">درخواست مشاوره</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        © ۲۰۲۶ ایرانیو — فهرست کسب‌وکارهای ایرانی در بریتانیا
+      </div>
+    </footer>
+    <nav class="app-dock" aria-label="ناوبری سریع">
+      <a href="index.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">🏠</span><span class="app-dock__lbl">خانه</span></a>
+      <a href="listings.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">📋</span><span class="app-dock__lbl">لیست</span></a>
+      <a href="advertise.html" class="app-dock__item app-dock__item--active" aria-current="page"><span class="app-dock__ico" aria-hidden="true">📣</span><span class="app-dock__lbl">آگهی</span></a>
+      <a href="dashboard.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">⚙️</span><span class="app-dock__lbl">پنل</span></a>
+    </nav>
+  </body>
+</html>

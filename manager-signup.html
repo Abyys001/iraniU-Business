@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#3a0b47" />
+    <title>ثبت‌نام مدیر کسب‌وکار — ایرانیو</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">پرش به محتوا</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="logo" href="index.html">
+          <span class="logo__mark" aria-hidden="true">ای</span>
+          <span>ایرانیو</span>
+        </a>
+        <input type="checkbox" id="site-nav-toggle" class="site-nav-cb" />
+        <label for="site-nav-toggle" class="nav-toggle" aria-label="باز و بسته کردن منو">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+        <nav class="nav" id="site-nav" aria-label="اصلی">
+          <ul class="nav__links">
+            <li><a href="index.html">خانه</a></li>
+            <li><a href="listings.html">لیست کسب‌وکارها</a></li>
+            <li><a href="advertise.html">تبلیغات و بسته‌ها</a></li>
+            <li><a href="dashboard.html">پنل کسب‌وکار</a></li>
+          </ul>
+          <div class="nav__cta">
+            <a class="btn btn--ghost" href="claim.html">ادعای آگهی</a>
+            <a class="btn btn--primary" href="listings.html">جستجو</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="page-hero">
+        <div class="container">
+          <h1>ثبت‌نام مدیر</h1>
+          <p>
+            با Google وارد شوید تا نام، ایمیل و تصویر پروفایل در سیستم ذخیره شود؛ سپس لینک Google Business
+            را برای تأیید ادمین وارد کنید.
+          </p>
+        </div>
+      </div>
+
+      <section class="section container">
+        <div class="form-panel form-panel--wide">
+          <div class="auth-stack">
+            <button
+              type="button"
+              class="btn btn--google"
+              data-google-signin-demo
+              data-feedback-target="gf-signup"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="18" height="18" aria-hidden="true">
+                <path
+                  fill="#FFC107"
+                  d="M43.611 20.083H42V20H24v8h11.303C33.72 32.658 29.083 36 24 36c-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"
+                />
+                <path
+                  fill="#FF3D00"
+                  d="M6.306 14.691l6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"
+                />
+                <path
+                  fill="#4CAF50"
+                  d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238C29.211 35.091 26.715 36 24 36c-5.059 0-9.484-2.84-11.697-7.003l-6.563 5.057C9.657 39.889 16.297 44 24 44z"
+                />
+                <path
+                  fill="#1976D2"
+                  d="M43.611 20.083H42V20H24v8h11.303c-.792 2.237-2.231 4.166-4.087 5.571l6.19 5.238C42.022 36.153 44 30.504 44 24c0-1.341-.138-2.65-.389-3.917z"
+                />
+              </svg>
+              ثبت‌نام / ورود با Google
+            </button>
+            <p class="field-hint" id="gf-signup" hidden role="status"></p>
+            <div class="auth-divider">یا دستی (تا اتصال OAuth)</div>
+          </div>
+
+          <form action="#" method="post">
+            <div class="form-grid">
+              <div class="field">
+                <label for="su-name">نام و نام خانوادگی</label>
+                <input type="text" id="su-name" name="full_name" autocomplete="name" />
+              </div>
+              <div class="field">
+                <label for="su-email">ایمیل</label>
+                <input type="email" id="su-email" name="email" autocomplete="email" required />
+              </div>
+              <div class="field">
+                <label for="su-phone">تلفن UK</label>
+                <input type="tel" id="su-phone" name="phone" autocomplete="tel" />
+              </div>
+              <div class="field field--block">
+                <label for="su-gbp">لینک Google Business Profile کسب‌وکار (برای تأیید سوپرادمین)</label>
+                <input
+                  type="url"
+                  id="su-gbp"
+                  name="google_business_profile_url"
+                  placeholder="https://g.page/..."
+                  required
+                  lang="en"
+                />
+                <p class="field-hint">
+                  سوپرادمین این آدرس را با آگهی ثبت‌شده در فهرست مقایسه می‌کند؛ پس از ادعا، آگهی به همین
+                  حساب مدیر لینک می‌شود.
+                </p>
+              </div>
+            </div>
+            <button type="submit" class="btn btn--primary btn--block form-submit">ایجاد حساب مدیر (نمونه)</button>
+            <p class="field-hint form-panel__after-submit">
+              قبلاً درخواست ادعا دادید؟
+              <a href="claim.html">بازگشت به فرم ادعا</a>
+            </p>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__grid">
+        <div>
+          <h2 class="site-footer__title">ایرانیو</h2>
+          <p>فهرست کسب‌وکارهای فارسی‌زبان در بریتانیا.</p>
+        </div>
+        <div>
+          <h2 class="site-footer__title">لینک‌ها</h2>
+          <ul>
+            <li><a href="claim.html">ادعای مالکیت</a></li>
+            <li><a href="dashboard.html">پنل</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="site-footer__bottom">
+        © ۲۰۲۶ ایرانیو
+      </div>
+    </footer>
+    <nav class="app-dock" aria-label="ناوبری سریع">
+      <a href="index.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">🏠</span><span class="app-dock__lbl">خانه</span></a>
+      <a href="listings.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">📋</span><span class="app-dock__lbl">لیست</span></a>
+      <a href="advertise.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">📣</span><span class="app-dock__lbl">آگهی</span></a>
+      <a href="dashboard.html" class="app-dock__item app-dock__item--active" aria-current="page"><span class="app-dock__ico" aria-hidden="true">⚙️</span><span class="app-dock__lbl">پنل</span></a>
+    </nav>
+  </body>
+</html>

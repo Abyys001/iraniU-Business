@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#3a0b47" />
+    <title>پنل سوپرادمین — ایرانیو</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="no-app-dock">
+    <a class="skip-link" href="#main">پرش به محتوا</a>
+    <div class="admin-topbar">
+      <p class="admin-topbar__title">پنل سوپرادمین — ایرانیو (رابط کاربری دمو)</p>
+      <a href="index.html">بازگشت به سایت عمومی</a>
+    </div>
+
+    <main id="main" class="admin-wrap">
+      <p class="dashboard-note admin-note--spaced">
+        تمام جداول و دکمه‌ها نمونه‌اند. جریان درست: ابتدا آگهی بدون مالک توسط شما ساخته می‌شود؛ مدیر با گوگل
+        ثبت‌نام می‌کند و ادعا + لینک Google Business می‌فرستد؛ شما اینجا تأیید کرده و آگهی را به حساب مدیر
+        لینک می‌کنید. ورود واقعی، OAuth گوگل و API بعداً اضافه می‌شود.
+      </p>
+
+      <div class="admin-layout">
+        <aside class="admin-sidebar" aria-label="منوی ادمین">
+          <ul class="admin-nav">
+            <li><a href="#admin-businesses">همه آگهی‌ها</a></li>
+            <li><a href="#admin-edit-advert">ویرایش آگهی</a></li>
+            <li><a href="#admin-add-business">افزودن آگهی</a></li>
+            <li><a href="#admin-claims">درخواست‌های ادعا</a></li>
+            <li><a href="#admin-link">لینک آگهی ↔ مدیر</a></li>
+            <li><a href="#admin-billing">صورت‌حساب و پرداخت</a></li>
+            <li><a href="#admin-managers">حساب‌های مدیر</a></li>
+          </ul>
+        </aside>
+
+        <div>
+          <section class="admin-panel" id="admin-businesses" aria-labelledby="ab-h">
+            <h2 id="ab-h">همه آگهی‌ها</h2>
+            <p class="field-hint">
+              جدول زیر فقط برای <strong>طراحی رابط</strong> است (HTML ثابت). دکمه‌ها و فیلدها بدون اسکریپت فعلاً
+              عمل نمی‌کنند.
+            </p>
+            <div class="table-wrap admin-businesses-table-wrap">
+              <table class="data-table data-table--admin-businesses">
+                <thead>
+                  <tr>
+                    <th>نام و شناسه</th>
+                    <th>آدرس</th>
+                    <th>یادداشت ادمین</th>
+                    <th>دلیل غیرفعال‌سازی</th>
+                    <th>وضعیت</th>
+                    <th>اقدام</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong><a href="business.html">رستوران سفره</a></strong><br />
+                      <span class="field-hint" dir="ltr">f3a8c91d2b04</span>
+                    </td>
+                    <td>کنزینگتون، لندن</td>
+                    <td><textarea class="admin-textarea-sm" rows="2" aria-label="یادداشت"></textarea></td>
+                    <td><textarea class="admin-textarea-sm" rows="2" aria-label="دلیل"></textarea></td>
+                    <td>
+                      <span class="status-pill status-pill--claimed">فعال</span>
+                      <div class="admin-business-btn-row">
+                        <button type="button" class="btn btn--primary">فعال‌سازی</button>
+                        <button type="button" class="btn btn--ghost">غیرفعال‌سازی</button>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="admin-inline-actions">
+                        <a class="btn btn--ghost" href="listings.html">لیست عمومی</a>
+                        <a class="btn btn--ghost" href="#admin-edit-advert">فرم ویرایش</a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong><a href="business-claimed.html">کلینیک پارس</a></strong><br />
+                      <span class="field-hint" dir="ltr">7e4b1c90a56f</span>
+                    </td>
+                    <td>منچستر</td>
+                    <td><textarea class="admin-textarea-sm" rows="2">بسته ویژه</textarea></td>
+                    <td><textarea class="admin-textarea-sm" rows="2"></textarea></td>
+                    <td>
+                      <span class="status-pill status-pill--claimed">فعال</span>
+                      <div class="admin-business-btn-row">
+                        <button type="button" class="btn btn--primary">فعال‌سازی</button>
+                        <button type="button" class="btn btn--ghost">غیرفعال‌سازی</button>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="admin-inline-actions">
+                        <a class="btn btn--ghost" href="listings.html">لیست عمومی</a>
+                        <a class="btn btn--ghost" href="#admin-edit-advert">فرم ویرایش</a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong><a href="business.html">سوپرمارکت برکت</a></strong><br />
+                      <span class="field-hint" dir="ltr">2c9d0e4f8a1b</span>
+                    </td>
+                    <td>منچستر</td>
+                    <td><textarea class="admin-textarea-sm" rows="2"></textarea></td>
+                    <td><textarea class="admin-textarea-sm" rows="2"></textarea></td>
+                    <td>
+                      <span class="status-pill status-pill--claimed">فعال</span>
+                      <div class="admin-business-btn-row">
+                        <button type="button" class="btn btn--primary">فعال‌سازی</button>
+                        <button type="button" class="btn btn--ghost">غیرفعال‌سازی</button>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="admin-inline-actions">
+                        <a class="btn btn--ghost" href="listings.html">لیست عمومی</a>
+                        <a class="btn btn--ghost" href="#admin-edit-advert">فرم ویرایش</a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <strong><a href="business.html">آرایشگاه گلنار</a></strong><br />
+                      <span class="field-hint" dir="ltr">b5d6e7f80912</span>
+                    </td>
+                    <td>بیرمنگام</td>
+                    <td><textarea class="admin-textarea-sm" rows="2">توقف موقت</textarea></td>
+                    <td><textarea class="admin-textarea-sm" rows="2">به‌روزرسانی مجوز</textarea></td>
+                    <td>
+                      <span class="status-pill status-pill--unclaimed">غیرفعال</span>
+                      <div class="admin-business-btn-row">
+                        <button type="button" class="btn btn--primary">فعال‌سازی</button>
+                        <button type="button" class="btn btn--ghost">غیرفعال‌سازی</button>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="admin-inline-actions">
+                        <a class="btn btn--ghost" href="listings.html">لیست عمومی</a>
+                        <a class="btn btn--ghost" href="#admin-edit-advert">فرم ویرایش</a>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="admin-panel" id="admin-edit-advert" aria-labelledby="edit-ad-h">
+            <h2 id="edit-ad-h">ویرایش آگهی (همه کسب‌وکارها)</h2>
+            <p class="field-hint">
+              فرم زیر با مقادیر نمونه پر شده است؛ فقط برای چیدمان و تایپوگرافی است (بدون ارسال واقعی).
+            </p>
+            <form action="#" method="post" id="admin-edit-advert-form">
+              <div class="form-grid">
+                <div class="field field--block">
+                  <label for="admin-edit-business-select">انتخاب کسب‌وکار</label>
+                  <select id="admin-edit-business-select" name="business_id" required>
+                    <option value="safereh">رستوران سفره — London</option>
+                    <option value="pars">کلینیک پارس — Manchester</option>
+                    <option value="barakat">سوپرمارکت برکت — Manchester</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="admin-edit-name">نام کسب‌وکار</label>
+                  <input type="text" id="admin-edit-name" name="name" required value="رستوران سفره" />
+                </div>
+                <div class="field">
+                  <label for="admin-edit-slug">نامک URL (انگلیسی)</label>
+                  <input type="text" id="admin-edit-slug" name="slug" lang="en" value="safereh-restaurant" />
+                </div>
+                <div class="field">
+                  <label for="admin-edit-cat">دسته</label>
+                  <select id="admin-edit-cat" name="category">
+                    <option value="food" selected>غذا و رستوران</option>
+                    <option value="health">سلامت</option>
+                    <option value="market">سوپرمارکت</option>
+                    <option value="legal">حقوقی</option>
+                    <option value="beauty">زیبایی</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="admin-edit-city">شهر</label>
+                  <select id="admin-edit-city" name="city">
+                    <option selected>London</option>
+                    <option>Manchester</option>
+                    <option>Birmingham</option>
+                    <option>Edinburgh</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="admin-edit-plan">بسته تبلیغاتی</label>
+                  <select id="admin-edit-plan" name="plan">
+                    <option value="basic">پایه</option>
+                    <option value="featured" selected>ویژه</option>
+                    <option value="pro">حرفه‌ای</option>
+                  </select>
+                </div>
+                <div class="field field--block">
+                  <label for="admin-edit-tagline">شعار کوتاه</label>
+                  <input type="text" id="admin-edit-tagline" name="tagline" value="غذای خانگی و کباب اصیل" />
+                </div>
+                <div class="field field--block">
+                  <label for="admin-edit-desc">توضیحات آگهی</label>
+                  <textarea id="admin-edit-desc" name="description" rows="4">منوی ایرانی، فضای خانوادگی، حلیم و آش آخر هفته.</textarea>
+                </div>
+                <div class="field">
+                  <label for="admin-edit-phone">تلفن</label>
+                  <input type="tel" id="admin-edit-phone" name="phone" value="020 1234 5678" />
+                </div>
+                <div class="field">
+                  <label for="admin-edit-email">ایمیل نمایشی</label>
+                  <input type="email" id="admin-edit-email" name="email" value="hello@safereh.example" />
+                </div>
+                <div class="field">
+                  <label for="admin-edit-web">وب‌سایت</label>
+                  <input type="url" id="admin-edit-web" name="website" lang="en" value="https://example.co.uk" />
+                </div>
+                <div class="field">
+                  <label for="admin-edit-insta">اینستاگرام</label>
+                  <input type="text" id="admin-edit-insta" name="instagram" value="@safereh_london" />
+                </div>
+                <div class="field field--block">
+                  <label for="admin-edit-address">آدرس</label>
+                  <input type="text" id="admin-edit-address" name="address" value="۱۲۳ نمونه خیابان، کنزینگتون، لندن" />
+                </div>
+                <div class="field field--block">
+                  <label for="admin-edit-hours">ساعات کاری</label>
+                  <textarea id="admin-edit-hours" name="hours" rows="2">شنبه–پنجشنبه ۱۲–۲۳، جمعه ۱۴–۲۳</textarea>
+                </div>
+                <div class="field field--block">
+                  <label for="admin-edit-gbp">لینک Google Business (مرجع تأیید)</label>
+                  <input type="url" id="admin-edit-gbp" name="google_business_profile_url" lang="en" value="https://maps.app.goo.gl/example" />
+                </div>
+                <div class="field field--block">
+                  <label>
+                    <input type="checkbox" id="admin-edit-featured-home" name="featured_home" checked />
+                    نمایش در بلوک ویژهٔ صفحهٔ اصلی
+                  </label>
+                </div>
+                <div class="field field--block">
+                  <label>
+                    <input type="checkbox" id="admin-edit-priority" name="priority_search" checked />
+                    اولویت بالاتر در جستجو
+                  </label>
+                </div>
+                <div class="field field--block">
+                  <label>
+                    <input type="checkbox" id="admin-edit-unclaimed" name="force_unclaimed" checked />
+                    علامت‌گذاری به‌عنوان بدون مالک (نمایش دکمهٔ ادعا)
+                  </label>
+                  <p class="field-hint">در بک‌اند با فیلد claimed / owner_id کنترل می‌شود.</p>
+                </div>
+              </div>
+              <div class="admin-form-actions">
+                <button type="submit" class="btn btn--primary">ذخیرهٔ تغییرات آگهی (نمونه)</button>
+              </div>
+            </form>
+          </section>
+
+          <section class="admin-panel" id="admin-add-business" aria-labelledby="add-h">
+            <h2 id="add-h">افزودن آگهی جدید (بدون مالک)</h2>
+            <p class="field-hint">
+              آگهی‌های جدید ابتدا بدون مالک در فهرست ظاهر می‌شوند؛ دکمهٔ «ادعای مالکیت» فقط برای همین حالت
+              به بازدیدکننده نشان داده می‌شود.
+            </p>
+            <form action="#" method="post">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="ad-name">نام کسب‌وکار</label>
+                  <input type="text" id="ad-name" name="name" required />
+                </div>
+                <div class="field">
+                  <label for="ad-city">شهر</label>
+                  <select id="ad-city" name="city">
+                    <option>London</option>
+                    <option>Manchester</option>
+                    <option>Birmingham</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="ad-cat">دسته</label>
+                  <select id="ad-cat" name="category">
+                    <option>غذا و رستوران</option>
+                    <option>سلامت</option>
+                    <option>سوپرمارکت</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="ad-plan">بسته اولیه</label>
+                  <select id="ad-plan" name="plan">
+                    <option value="basic">پایه</option>
+                    <option value="featured">ویژه</option>
+                    <option value="pro">حرفه‌ای</option>
+                  </select>
+                </div>
+                <div class="field field--block">
+                  <label for="ad-desc">توضیح کوتاه</label>
+                  <textarea id="ad-desc" name="description" rows="3"></textarea>
+                </div>
+              </div>
+              <button type="submit" class="btn btn--primary">ثبت آگهی در سیستم (نمونه)</button>
+            </form>
+          </section>
+
+          <section class="admin-panel" id="admin-claims" aria-labelledby="cl-h">
+            <h2 id="cl-h">درخواست‌های ادعا و تأیید Google Business</h2>
+            <p class="field-hint">
+              مدیر لینک پروفایل Google Business را ارسال کرده؛ با نام و آدرس آگهی تطبیق دهید و سپس از بخش
+              «لینک آگهی ↔ مدیر» حساب را وصل کنید.
+            </p>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>آگهی</th>
+                    <th>ایمیل / گوگل</th>
+                    <th>لینک Google Business</th>
+                    <th>وضعیت</th>
+                    <th>اقدام</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>رستوران سفره</td>
+                    <td lang="en">ali.manager@example.com</td>
+                    <td lang="en"><a href="#">maps.app.goo.gl/…</a> (نمونه)</td>
+                    <td><span class="status-pill status-pill--pending">در انتظار بررسی</span></td>
+                    <td>
+                      <div class="admin-inline-actions">
+                        <button type="button" class="btn btn--primary">تأیید و آمادهٔ لینک</button>
+                        <button type="button" class="btn btn--ghost">رد</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>سوپرمارکت برکت</td>
+                    <td lang="en">m.jafari@example.com</td>
+                    <td lang="en"><a href="#">g.page/…</a></td>
+                    <td><span class="status-pill status-pill--pending">در انتظار</span></td>
+                    <td>
+                      <div class="admin-inline-actions">
+                        <button type="button" class="btn btn--ghost">بررسی</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="admin-panel" id="admin-link" aria-labelledby="lk-h">
+            <h2 id="lk-h">لینک کردن آگهی به حساب مدیر</h2>
+            <p class="field-hint">
+              پس از تأیید هویت، آگهی را به کاربری که با Google ثبت‌نام کرده وصل کنید؛ پس از آن دکمهٔ ادعا در
+              صفحهٔ عمومی مخفی می‌شود و مدیر به پنل دسترسی پیدا می‌کند.
+            </p>
+            <form action="#" method="post">
+              <div class="form-grid">
+                <div class="field">
+                  <label for="link-business">آگهی</label>
+                  <select id="link-business" name="business_id">
+                    <option value="safereh">رستوران سفره (بدون مالک)</option>
+                    <option value="barakat">سوپرمارکت برکت (بدون مالک)</option>
+                    <option value="pars">کلینیک پارس (قبلاً لینک شده — نمونه)</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="link-manager">حساب مدیر</label>
+                  <select id="link-manager" name="manager_user_id">
+                    <option value="ali">ali.manager@example.com</option>
+                    <option value="sara">sara.k@example.com</option>
+                    <option value="m">m.jafari@example.com</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn btn--primary">ذخیره لینک (نمونه)</button>
+            </form>
+          </section>
+
+          <section class="admin-panel" id="admin-billing" aria-labelledby="bl-h">
+            <h2 id="bl-h">صورت‌حساب و بسته‌های تبلیغاتی</h2>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>شماره فاکتور</th>
+                    <th>کسب‌وکار</th>
+                    <th>مبلغ</th>
+                    <th>دوره</th>
+                    <th>وضعیت</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td lang="en">INV-2025-0142</td>
+                    <td>کلینیک پارس</td>
+                    <td>£۴۹</td>
+                    <td>اسفند ۱۴۰۳</td>
+                    <td><span class="status-pill status-pill--paid">پرداخت شده</span></td>
+                  </tr>
+                  <tr>
+                    <td lang="en">INV-2025-0143</td>
+                    <td>رستوران سفره</td>
+                    <td>£۴۹</td>
+                    <td>اسفند ۱۴۰۳</td>
+                    <td><span class="status-pill status-pill--pending">در انتظار</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="field-hint">اتصال درگاه پرداخت و صدور خودکار فاکتور در بک‌اند پیاده می‌شود.</p>
+          </section>
+
+          <section class="admin-panel" id="admin-managers" aria-labelledby="mg-h">
+            <h2 id="mg-h">حساب‌های مدیر (ثبت‌نام با Google)</h2>
+            <div class="table-wrap">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>نام</th>
+                    <th>ایمیل</th>
+                    <th>تأیید ایمیل</th>
+                    <th>آگهی‌های لینک‌شده</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>سارا کریمی</td>
+                    <td lang="en">sara.k@example.com</td>
+                    <td><span class="status-pill status-pill--claimed">تأیید</span></td>
+                    <td>کلینیک پارس</td>
+                  </tr>
+                  <tr>
+                    <td>علی محمدی</td>
+                    <td lang="en">ali.manager@example.com</td>
+                    <td><span class="status-pill status-pill--pending">در انتظار لینک آگهی</span></td>
+                    <td>—</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__bottom">
+        <a href="index.html">سایت عمومی</a>
+        ·
+        <span>آدرس این صفحه را فقط برای ادمین نگه دارید.</span>
+      </div>
+    </footer>
+  </body>
+</html>

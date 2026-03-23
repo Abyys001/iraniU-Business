@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#3a0b47" />
-    <title>داشبورد سوپرادمین — ایرانیو</title>
+    <title>گفتگو و لاگ سایت — سوپرادمین — ایرانیو</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -32,7 +32,7 @@
         <p class="app-shell__nav-title">سوپرادمین</p>
         <ul class="app-shell__nav">
           <li>
-            <a href="admin.html" aria-current="page">
+            <a href="admin.html">
               <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path
                   stroke="currentColor"
@@ -149,7 +149,7 @@
             </a>
           </li>
           <li>
-            <a href="admin-chat-log.html">
+            <a href="admin-chat-log.html" aria-current="page">
               <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path
                   stroke="currentColor"
@@ -178,8 +178,8 @@
             </svg>
           </label>
           <div class="app-shell__header-text">
-            <h1>داشبورد سوپرادمین</h1>
-            <p>خلاصهٔ وضعیت سیستم و آخرین رویدادها؛ مدیریت تفصیلی از منوی کناری.</p>
+            <h1>گفتگو و لاگ سایت</h1>
+            <p>مانیتورینگ پیام‌های ویجت؛ آموزش و تحلیل (نمونهٔ محلی + رلهٔ تلگرام)</p>
           </div>
           <div class="app-shell__search-wrap">
             <label class="visually-hidden" for="admin-global-search">جستجو در پنل</label>
@@ -192,16 +192,6 @@
             />
           </div>
           <div class="app-shell__header-actions">
-            <button type="button" class="app-shell__icon-btn" aria-label="اعلان‌ها">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path
-                  stroke="currentColor"
-                  stroke-width="2"
-                  d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
-                />
-                <path stroke="currentColor" stroke-width="2" d="M13.73 21a2 2 0 0 1-3.46 0" />
-              </svg>
-            </button>
             <div class="app-shell__user">
               <div class="app-shell__user-avatar" aria-hidden="true">م</div>
               <div class="app-shell__user-text">
@@ -214,117 +204,57 @@
 
         <div class="app-shell__scroll">
           <div class="admin-wrap">
-            <div class="app-shell__widgets">
-              <div class="app-shell__hero-card">
-                <p class="app-shell__hero-label">کل آگهی‌های سیستم</p>
-                <p class="app-shell__hero-value">۴</p>
-                <p class="app-shell__hero-meta">نمونهٔ رابط · فهرست کامل در «همه آگهی‌ها»</p>
-                <a class="app-shell__hero-btn" href="admin-add.html">افزودن آگهی جدید</a>
+            <p class="admin-back-link"><a href="admin.html">بازگشت به داشبورد</a></p>
+
+            <section class="admin-panel" aria-labelledby="chatlog-h">
+              <div class="admin-panel__head">
+                <h2 id="chatlog-h">لاگ پیام‌های ویجت پشتیبانی</h2>
               </div>
-              <div class="app-shell__metrics">
-                <div class="app-shell__metric app-shell__metric--teal">
-                  <p class="app-shell__metric-label">در انتظار ادعا</p>
-                  <p class="app-shell__metric-value">۲</p>
+              <p class="field-hint">
+                پیام‌های ارسالی از ویجت 💬 در سایت عمومی در <strong>همین مرورگر</strong> داخل localStorage ذخیره
+                می‌شوند تا بتوانید برای دمو آموزش/مانیتورینگ ببینید. برای پروداکشن، سرور رله را اجرا کنید: هر پیام
+                علاوه بر فایل JSONL روی سرور، به تلگرام شما هم فرستاده می‌شود (توکن ربات فقط در سرور).
+              </p>
+              <ol class="admin-chat-log__steps">
+                <li>
+                  در BotFather تلگرام بسازید؛ <code dir="ltr">TELEGRAM_BOT_TOKEN</code> و
+                  <code dir="ltr">TELEGRAM_ADMIN_CHAT_ID</code> (چت‌آیدی خودتان با ربات) را تنظیم کنید.
+                </li>
+                <li>
+                  اجرا:
+                  <code dir="ltr">node server/telegram-relay.mjs</code>
+                </li>
+                <li>
+                  در صفحات عمومی قبل از <code dir="ltr">chat-widget.js</code> بگذارید:
+                  <code dir="ltr">window.IRANIU_CHAT = { relayUrl: 'http://localhost:3847/relay' };</code>
+                  (در HTTPS، رله را هم روی HTTPS پشت دامنهٔ خودتان بگذارید.)
+                </li>
+                <li>فایل لاگ سرور: <code dir="ltr">server/data/chat-log.jsonl</code></li>
+              </ol>
+
+              <div class="admin-chat-log__toolbar">
+                <div class="field">
+                  <label for="admin-chat-log-filter">فیلتر متن</label>
+                  <input type="search" id="admin-chat-log-filter" placeholder="جستجو در نام، متن، نقش، URL…" />
                 </div>
-                <div class="app-shell__metric app-shell__metric--purple">
-                  <p class="app-shell__metric-label">آگهی فعال</p>
-                  <p class="app-shell__metric-value">۳</p>
-                </div>
-                <div class="app-shell__metric app-shell__metric--blue">
-                  <p class="app-shell__metric-label">فاکتور این ماه</p>
-                  <p class="app-shell__metric-value">۲</p>
-                </div>
-                <div class="app-shell__metric app-shell__metric--coral">
-                  <p class="app-shell__metric-label">غیرفعال</p>
-                  <p class="app-shell__metric-value">۱</p>
-                </div>
+                <span class="field-hint">تعداد نمایش: <strong id="admin-chat-log-count">0</strong></span>
+                <button type="button" class="btn btn--ghost" id="admin-chat-log-refresh">به‌روزرسانی</button>
+                <button type="button" class="btn btn--ghost" id="admin-chat-log-export-json">خروجی JSON</button>
+                <button type="button" class="btn btn--danger" id="admin-chat-log-clear">پاک کردن لاگ محلی</button>
               </div>
-            </div>
 
-            <p class="dashboard-note admin-note--spaced">
-              این صفحه فقط نمای کلی است. جداول و فرم‌های عملیاتی در صفحات جداگانه باز می‌شوند؛ اتصال به API و
-              OAuth گوگل بعداً اضافه می‌شود.
-            </p>
-
-            <nav class="admin-dash-quick" aria-label="میانبر بخش‌های مدیریت">
-              <a class="admin-dash-quick__card" href="admin-businesses.html">
-                همه آگهی‌ها
-                <small>فهرست، وضعیت، یادداشت و مودال اقدام</small>
-              </a>
-              <a class="admin-dash-quick__card" href="admin-edit.html">
-                ویرایش آگهی
-                <small>فرم ویرایش برای همه کسب‌وکارها</small>
-              </a>
-              <a class="admin-dash-quick__card" href="admin-add.html">
-                افزودن آگهی
-                <small>ثبت آگهی بدون مالک</small>
-              </a>
-              <a class="admin-dash-quick__card" href="admin-claims.html">
-                درخواست‌های ادعا
-                <small>تأیید Google Business</small>
-              </a>
-              <a class="admin-dash-quick__card" href="admin-link.html">
-                لینک آگهی ↔ مدیر
-                <small>اتصال پس از تأیید ادعا</small>
-              </a>
-              <a class="admin-dash-quick__card" href="admin-billing.html">
-                صورت‌حساب
-                <small>فاکتورها و بسته‌ها</small>
-              </a>
-              <a class="admin-dash-quick__card" href="admin-managers.html">
-                حساب‌های مدیر
-                <small>ثبت‌نام با Google</small>
-              </a>
-              <a class="admin-dash-quick__card" href="admin-chat-log.html">
-                گفتگو و لاگ سایت
-                <small>پیام‌های ویجت، خروجی JSON، رلهٔ تلگرام</small>
-              </a>
-            </nav>
-
-            <section class="admin-panel admin-panel--dashboard-recent" aria-labelledby="dash-recent-h">
-              <h2 id="dash-recent-h">آخرین افزوده‌ها و رویدادها</h2>
-              <p class="field-hint">نمونهٔ داده برای نمای داشبورد؛ اتصال به API بعداً.</p>
               <div class="table-wrap">
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>موضوع</th>
-                      <th>نوع</th>
-                      <th>تاریخ (نمونه)</th>
-                      <th>وضعیت</th>
-                      <th></th>
+                      <th>زمان</th>
+                      <th>نقش</th>
+                      <th>نام</th>
+                      <th>متن</th>
+                      <th>صفحه</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>رستوران سفره</td>
-                      <td>آگهی</td>
-                      <td>۱۴۰۳/۱۲/۱۰</td>
-                      <td><span class="status-pill status-pill--claimed">منتشر</span></td>
-                      <td><a class="btn btn--ghost" href="admin-businesses.html">مدیریت</a></td>
-                    </tr>
-                    <tr>
-                      <td>ادعا — سوپرمارکت برکت</td>
-                      <td>ادعا</td>
-                      <td>۱۴۰۳/۱۲/۰۹</td>
-                      <td><span class="status-pill status-pill--pending">در انتظار</span></td>
-                      <td><a class="btn btn--ghost" href="admin-claims.html">بررسی</a></td>
-                    </tr>
-                    <tr>
-                      <td>فاکتور INV-2025-0143</td>
-                      <td>صورت‌حساب</td>
-                      <td>۱۴۰۳/۱۲/۰۸</td>
-                      <td><span class="status-pill status-pill--pending">در انتظار پرداخت</span></td>
-                      <td><a class="btn btn--ghost" href="admin-billing.html">جزئیات</a></td>
-                    </tr>
-                    <tr>
-                      <td>حساب علی محمدی</td>
-                      <td>مدیر</td>
-                      <td>۱۴۰۳/۱۲/۰۷</td>
-                      <td><span class="status-pill status-pill--pending">در انتظار لینک</span></td>
-                      <td><a class="btn btn--ghost" href="admin-managers.html">پروفایل</a></td>
-                    </tr>
-                  </tbody>
+                  <tbody id="admin-chat-log-tbody"></tbody>
                 </table>
               </div>
             </section>
@@ -333,5 +263,6 @@
       </div>
     </main>
 
+    <script src="js/admin-chat-log.js" defer></script>
   </body>
 </html>

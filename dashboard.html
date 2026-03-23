@@ -13,257 +13,424 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body class="has-app-dock">
+  <body class="app-shell-body">
+    <script src="js/require-mobile.js"></script>
     <a class="skip-link" href="#main">پرش به محتوا</a>
-    <header class="site-header">
-      <div class="site-header__inner">
-        <a class="logo" href="index.html">
-          <span class="logo__mark" aria-hidden="true">ای</span>
+
+    <div class="app-shell" id="main">
+      <input type="checkbox" id="app-shell-sidebar-toggle" class="app-shell-sidebar-cb" />
+      <label
+        class="app-shell__sidebar-overlay"
+        for="app-shell-sidebar-toggle"
+        aria-hidden="true"
+      ></label>
+      <aside class="app-shell__sidebar" aria-label="منوی پنل">
+        <a class="app-shell__brand" href="index.html">
+          <span class="app-shell__brand-mark" aria-hidden="true">ای</span>
           <span>ایرانیو</span>
         </a>
-        <input type="checkbox" id="site-nav-toggle" class="site-nav-cb" />
-        <label for="site-nav-toggle" class="nav-toggle" aria-label="باز و بسته کردن منو">
-          <span></span>
-          <span></span>
-          <span></span>
-        </label>
-        <nav class="nav" id="site-nav" aria-label="اصلی">
-          <ul class="nav__links">
-            <li><a href="index.html">خانه</a></li>
-            <li><a href="listings.html">لیست کسب‌وکارها</a></li>
-            <li><a href="advertise.html">تبلیغات و بسته‌ها</a></li>
-            <li><a href="dashboard.html" aria-current="page">پنل کسب‌وکار</a></li>
-          </ul>
-          <div class="nav__cta">
-            <a class="btn btn--ghost" href="business.html">پیش‌نمایش آگهی</a>
-            <a class="btn btn--primary" href="listings.html">مشاهده فهرست</a>
+        <p class="app-shell__nav-title">پنل کسب‌وکار</p>
+        <ul class="app-shell__nav">
+          <li>
+            <a href="#panel-overview" aria-current="page">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                />
+                <path stroke="currentColor" stroke-width="2" d="M9 22V12h6v10" />
+              </svg>
+              نمای کلی
+            </a>
+          </li>
+          <li>
+            <a href="#edit-ad">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
+                />
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
+                />
+              </svg>
+              ویرایش آگهی
+            </a>
+          </li>
+          <li>
+            <a href="#package">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"
+                />
+                <path stroke="currentColor" stroke-width="2" d="M7 7h.01" />
+              </svg>
+              بسته تبلیغاتی
+            </a>
+          </li>
+          <li>
+            <a href="#media">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect
+                  x="3"
+                  y="3"
+                  width="18"
+                  height="18"
+                  rx="2"
+                  ry="2"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" />
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M21 15l-5-5L5 21"
+                />
+              </svg>
+              تصاویر
+            </a>
+          </li>
+          <li>
+            <a href="business.html">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                />
+                <path stroke="currentColor" stroke-width="2" d="M15 3h6v6" />
+                <path stroke="currentColor" stroke-width="2" d="M10 14L21 3" />
+              </svg>
+              پیش‌نمایش عمومی
+            </a>
+          </li>
+        </ul>
+        <div class="app-shell__sidebar-foot">
+          <a href="listings.html">مشاهده در فهرست</a>
+          ·
+          <a href="advertise.html">ارتقای بسته</a>
+        </div>
+      </aside>
+
+      <div class="app-shell__body">
+        <header class="app-shell__header">
+          <label
+            for="app-shell-sidebar-toggle"
+            class="app-shell__sidebar-toggle"
+            aria-label="باز و بسته کردن منو"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                stroke="currentColor"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </label>
+          <div class="app-shell__header-text">
+            <h1>پنل کسب‌وکار</h1>
+            <p>سلام! خوش آمدید — رستوران سفره · آخرین ویرایش: نمونه (بدون سرور)</p>
           </div>
-        </nav>
-      </div>
-    </header>
-
-    <main id="main">
-      <div class="dashboard-wrap">
-        <div class="dashboard">
-          <aside class="dashboard-sidebar" aria-label="منوی پنل">
-            <p class="dashboard-sidebar__title">منو</p>
-            <ul class="dashboard-nav">
-              <li><a href="#panel-overview">نمای کلی</a></li>
-              <li><a href="#edit-ad">ویرایش آگهی</a></li>
-              <li><a href="#package">بسته تبلیغاتی</a></li>
-              <li><a href="#media">تصاویر</a></li>
-              <li><a href="business.html">پیش‌نمایش عمومی</a></li>
-            </ul>
-          </aside>
-
-          <div class="dashboard-main">
-            <div class="dashboard-toolbar">
-              <div>
-                <h1>پنل کسب‌وکار</h1>
-                <p class="dashboard-toolbar__meta">رستوران سفره — آخرین ویرایش ذخیره‌شده: نمونه (بدون سرور)</p>
+          <div class="app-shell__search-wrap">
+            <label class="visually-hidden" for="dash-global-search">جستجو در پنل</label>
+            <input
+              type="search"
+              id="dash-global-search"
+              class="app-shell__search"
+              placeholder="جستجو در پنل…"
+              autocomplete="off"
+            />
+          </div>
+          <div class="app-shell__header-actions">
+            <button type="button" class="app-shell__icon-btn" aria-label="اعلان‌ها">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
+                />
+                <path stroke="currentColor" stroke-width="2" d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+            </button>
+            <button type="button" class="app-shell__icon-btn" aria-label="پیام‌ها">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                />
+                <path stroke="currentColor" stroke-width="2" d="M22 6l-10 7L2 6" />
+              </svg>
+            </button>
+            <div class="app-shell__user">
+              <div class="app-shell__user-avatar" aria-hidden="true">س</div>
+              <div class="app-shell__user-text">
+                <strong>رستوران سفره</strong>
+                <small>مالک آگهی</small>
               </div>
-              <span class="package-pill" title="بسته فعلی">بسته ویژه</span>
             </div>
+          </div>
+        </header>
 
-            <p class="dashboard-note">
-              این صفحه فقط رابط کاربری است. دکمه‌های ذخیره و انتشار بعداً به ورود، API و دیتابیس وصل می‌شوند.
-              اگر آگهی هنوز به حساب شما لینک نشده، ابتدا
-              <a href="manager-signup.html">ثبت‌نام مدیر</a>
-              (ترجیحاً با Google) و سپس
-              <a href="claim.html?business=%D8%B1%D8%B3%D8%AA%D9%88%D8%B1%D8%A7%D9%86%20%D8%B3%D9%81%D8%B1%D9%87">درخواست ادعای مالکیت</a>
-              را ثبت کنید؛ پس از تأیید سوپرادمین و لینک آگهی به حسابتان، ویرایش از همین پنل فعال می‌شود.
-            </p>
+        <div class="app-shell__scroll">
+          <div class="dashboard-wrap">
+            <div class="dashboard">
+              <aside class="dashboard-sidebar" aria-hidden="true"></aside>
 
-            <section class="dashboard-panel" id="panel-overview" aria-labelledby="overview-heading">
-              <h2 id="overview-heading">نمای کلی</h2>
-              <div class="dashboard-stats">
-                <div class="stat-card">
-                  <p class="stat-card__label">وضعیت آگهی</p>
-                  <p class="stat-card__value">منتشر شده</p>
+              <div class="dashboard-main">
+                <div class="app-shell__widgets">
+                  <div class="app-shell__hero-card">
+                    <p class="app-shell__hero-label">وضعیت آگهی</p>
+                    <p class="app-shell__hero-value">منتشر شده</p>
+                    <p class="app-shell__hero-meta">در فهرست عمومی و نقشه دیده می‌شود · بسته ویژه فعال</p>
+                    <a class="app-shell__hero-btn" href="advertise.html">مدیریت بسته</a>
+                  </div>
+                  <div class="app-shell__metrics">
+                    <div class="app-shell__metric app-shell__metric--teal">
+                      <svg
+                        class="app-shell__metric-ico"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke="#fff"
+                          stroke-width="2"
+                          d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                        />
+                        <circle cx="12" cy="12" r="3" stroke="#fff" stroke-width="2" />
+                      </svg>
+                      <p class="app-shell__metric-label">بازدید نمونه (۳۰ روز)</p>
+                      <p class="app-shell__metric-value">۱٬۲۳۴</p>
+                    </div>
+                    <div class="app-shell__metric app-shell__metric--purple">
+                      <svg
+                        class="app-shell__metric-ico"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke="#fff"
+                          stroke-width="2"
+                          d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                        />
+                      </svg>
+                      <p class="app-shell__metric-label">بسته فعلی</p>
+                      <p class="app-shell__metric-value">ویژه</p>
+                    </div>
+                    <div class="app-shell__metric app-shell__metric--blue">
+                      <svg
+                        class="app-shell__metric-ico"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke="#fff"
+                          stroke-width="2"
+                          d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"
+                        />
+                      </svg>
+                      <p class="app-shell__metric-label">تماس نمونه</p>
+                      <p class="app-shell__metric-value">۴۸</p>
+                    </div>
+                    <div class="app-shell__metric app-shell__metric--coral">
+                      <svg
+                        class="app-shell__metric-ico"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          stroke="#fff"
+                          stroke-width="2"
+                          d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+                        />
+                      </svg>
+                      <p class="app-shell__metric-label">امتیاز نمونه</p>
+                      <p class="app-shell__metric-value">۴٫۸</p>
+                    </div>
+                  </div>
                 </div>
-                <div class="stat-card">
-                  <p class="stat-card__label">بازدید نمونه (۳۰ روز)</p>
-                  <p class="stat-card__value">۱٬۲۳۴</p>
-                </div>
-                <div class="stat-card">
-                  <p class="stat-card__label">تمدید بعدی</p>
-                  <p class="stat-card__value stat-card__value--text">۱۵ آوریل ۲۰۲۵</p>
-                </div>
-              </div>
-            </section>
 
-            <section class="dashboard-panel" id="edit-ad" aria-labelledby="edit-heading">
-              <h2 id="edit-heading">ویرایش آگهی</h2>
+                <p class="dashboard-note">
+                  این صفحه فقط رابط کاربری است. دکمه‌های ذخیره و انتشار بعداً به ورود، API و دیتابیس وصل می‌شوند.
+                  اگر آگهی هنوز به حساب شما لینک نشده، ابتدا
+                  <a href="manager-signup.html">ثبت‌نام مدیر</a>
+                  (ترجیحاً با Google) و سپس
+                  <a href="claim.html?business=%D8%B1%D8%B3%D8%AA%D9%88%D8%B1%D8%A7%D9%86%20%D8%B3%D9%81%D8%B1%D9%87">درخواست ادعای مالکیت</a>
+                  را ثبت کنید؛ پس از تأیید سوپرادمین و لینک آگهی به حسابتان، ویرایش از همین پنل فعال می‌شود.
+                </p>
 
-              <h3>اطلاعات اصلی</h3>
-              <form action="#" method="post">
-                <div class="form-grid">
-                  <div class="field">
-                    <label for="dash-name">نام کسب‌وکار</label>
-                    <input type="text" id="dash-name" name="name" value="رستوران سفره" required />
-                  </div>
-                  <div class="field">
-                    <label for="dash-slug">نامک در آدرس (انگلیسی)</label>
-                    <input type="text" id="dash-slug" name="slug" value="safereh-restaurant" lang="en" />
-                    <p class="field-hint">مثال: yoursite.co.uk/business/safereh-restaurant</p>
-                  </div>
-                  <div class="field">
-                    <label for="dash-cat">دسته اصلی</label>
-                    <select id="dash-cat" name="category">
-                      <option value="food" selected>غذا و رستوران</option>
-                      <option value="market">سوپرمارکت</option>
-                      <option value="health">سلامت</option>
-                      <option value="legal">حقوقی</option>
-                      <option value="beauty">زیبایی</option>
-                    </select>
-                  </div>
-                  <div class="field">
-                    <label for="dash-city">شهر (UK)</label>
-                    <select id="dash-city" name="city">
-                      <option selected>London</option>
-                      <option>Manchester</option>
-                      <option>Birmingham</option>
-                      <option>Edinburgh</option>
-                    </select>
-                  </div>
-                  <div class="field field--block">
-                    <label for="dash-tagline">شعار کوتاه</label>
-                    <input
-                      type="text"
-                      id="dash-tagline"
-                      name="tagline"
-                      value="غذای خانگی و کباب اصیل — رزرو آنلاین"
-                    />
-                  </div>
-                  <div class="field field--block">
-                    <label for="dash-desc">توضیحات آگهی</label>
-                    <textarea id="dash-desc" name="description" rows="5">
+                <section class="dashboard-panel" id="panel-overview" aria-labelledby="overview-heading">
+                  <h2 id="overview-heading">نمای کلی</h2>
+                  <p class="field-hint" style="margin: 0">
+                    خلاصهٔ بالا را ببینید؛ جزئیات ویرایش در بخش‌های زیر در دسترس است.
+                  </p>
+                </section>
+
+                <section class="dashboard-panel" id="edit-ad" aria-labelledby="edit-heading">
+                  <h2 id="edit-heading">ویرایش آگهی</h2>
+
+                  <h3>اطلاعات اصلی</h3>
+                  <form action="#" method="post">
+                    <div class="form-grid">
+                      <div class="field">
+                        <label for="dash-name">نام کسب‌وکار</label>
+                        <input type="text" id="dash-name" name="name" value="رستوران سفره" required />
+                      </div>
+                      <div class="field">
+                        <label for="dash-slug">نامک در آدرس (انگلیسی)</label>
+                        <input type="text" id="dash-slug" name="slug" value="safereh-restaurant" lang="en" />
+                        <p class="field-hint">مثال: yoursite.co.uk/business/safereh-restaurant</p>
+                      </div>
+                      <div class="field">
+                        <label for="dash-cat">دسته اصلی</label>
+                        <select id="dash-cat" name="category">
+                          <option value="food" selected>غذا و رستوران</option>
+                          <option value="market">سوپرمارکت</option>
+                          <option value="health">سلامت</option>
+                          <option value="legal">حقوقی</option>
+                          <option value="beauty">زیبایی</option>
+                        </select>
+                      </div>
+                      <div class="field">
+                        <label for="dash-city">شهر (UK)</label>
+                        <select id="dash-city" name="city">
+                          <option selected>London</option>
+                          <option>Manchester</option>
+                          <option>Birmingham</option>
+                          <option>Edinburgh</option>
+                        </select>
+                      </div>
+                      <div class="field field--block">
+                        <label for="dash-tagline">شعار کوتاه</label>
+                        <input
+                          type="text"
+                          id="dash-tagline"
+                          name="tagline"
+                          value="غذای خانگی و کباب اصیل — رزرو آنلاین"
+                        />
+                      </div>
+                      <div class="field field--block">
+                        <label for="dash-desc">توضیحات آگهی</label>
+                        <textarea id="dash-desc" name="description" rows="5">
 منوی ایرانی، فضای خانوادگی، حلیم و آش آخر هفته. ارسال در شعاع مشخص و رزرو تلفنی.</textarea>
-                  </div>
-                </div>
+                      </div>
+                    </div>
 
-                <h3>تماس و مکان</h3>
-                <div class="form-grid">
-                  <div class="field">
-                    <label for="dash-phone">تلفن</label>
-                    <input type="tel" id="dash-phone" name="phone" value="020 1234 5678" />
-                  </div>
-                  <div class="field">
-                    <label for="dash-email">ایمیل عمومی</label>
-                    <input type="email" id="dash-email" name="email" value="hello@safereh.example" />
-                  </div>
-                  <div class="field">
-                    <label for="dash-web">وب‌سایت</label>
-                    <input type="url" id="dash-web" name="website" value="https://example.co.uk" lang="en" />
-                  </div>
-                  <div class="field">
-                    <label for="dash-insta">اینستاگرام</label>
-                    <input type="text" id="dash-insta" name="instagram" value="@safereh_london" />
-                  </div>
-                  <div class="field field--block">
-                    <label for="dash-address">آدرس کامل</label>
-                    <input
-                      type="text"
-                      id="dash-address"
-                      name="address"
-                      value="۱۲۳ نمونه خیابان، کنزینگتون، لندن"
-                    />
-                  </div>
-                  <div class="field field--block">
-                    <label for="dash-hours">ساعات کاری</label>
-                    <textarea id="dash-hours" name="hours" rows="3">
+                    <h3>تماس و مکان</h3>
+                    <div class="form-grid">
+                      <div class="field">
+                        <label for="dash-phone">تلفن</label>
+                        <input type="tel" id="dash-phone" name="phone" value="020 1234 5678" />
+                      </div>
+                      <div class="field">
+                        <label for="dash-email">ایمیل عمومی</label>
+                        <input type="email" id="dash-email" name="email" value="hello@safereh.example" />
+                      </div>
+                      <div class="field">
+                        <label for="dash-web">وب‌سایت</label>
+                        <input type="url" id="dash-web" name="website" value="https://example.co.uk" lang="en" />
+                      </div>
+                      <div class="field">
+                        <label for="dash-insta">اینستاگرام</label>
+                        <input type="text" id="dash-insta" name="instagram" value="@safereh_london" />
+                      </div>
+                      <div class="field">
+                        <label for="dash-telegram">تلگرام (نام کاربری بدون @)</label>
+                        <input type="text" id="dash-telegram" name="telegram_username" lang="en" value="safereh_info" />
+                      </div>
+                      <div class="field">
+                        <label for="dash-whatsapp">واتساپ (ارقام؛ مثال 442012345678)</label>
+                        <input type="text" id="dash-whatsapp" name="whatsapp_e164" lang="en" value="442012345678" />
+                      </div>
+                      <div class="field field--block">
+                        <label for="dash-address">آدرس کامل</label>
+                        <input
+                          type="text"
+                          id="dash-address"
+                          name="address"
+                          value="۱۲۳ نمونه خیابان، کنزینگتون، لندن"
+                        />
+                      </div>
+                      <div class="field field--block">
+                        <label for="dash-hours">ساعات کاری</label>
+                        <textarea id="dash-hours" name="hours" rows="3">
 شنبه–پنجشنبه ۱۲–۲۳، جمعه ۱۴–۲۳</textarea>
-                  </div>
-                </div>
+                      </div>
+                    </div>
 
-                <h3>گزینه‌های نمایش (بسته ویژه)</h3>
-                <div class="form-grid">
-                  <div class="field field--block">
-                    <label>
-                      <input type="checkbox" name="featured_home" checked />
-                      نمایش در بلوک «کسب‌وکارهای ویژه» در صفحه اصلی
-                    </label>
-                    <p class="field-hint">در بسته پایه غیرفعال است.</p>
-                  </div>
-                  <div class="field field--block">
-                    <label>
-                      <input type="checkbox" name="priority_search" checked />
-                      اولویت بالاتر در نتایج جستجو
-                    </label>
-                  </div>
-                </div>
+                    <h3>گزینه‌های نمایش (بسته ویژه)</h3>
+                    <div class="form-grid">
+                      <div class="field field--block">
+                        <label>
+                          <input type="checkbox" name="featured_home" checked />
+                          نمایش در بلوک «کسب‌وکارهای ویژه» در صفحه اصلی
+                        </label>
+                        <p class="field-hint">در بسته پایه غیرفعال است.</p>
+                      </div>
+                      <div class="field field--block">
+                        <label>
+                          <input type="checkbox" name="priority_search" checked />
+                          اولویت بالاتر در نتایج جستجو
+                        </label>
+                      </div>
+                    </div>
 
-                <div class="dashboard-actions">
-                  <button type="submit" class="btn btn--primary">ذخیره و به‌روزرسانی آگهی (نمونه)</button>
-                  <button type="button" class="btn btn--ghost">ذخیره پیش‌نویس (نمونه)</button>
-                  <a class="btn btn--ghost" href="business.html">پیش‌نمایش</a>
-                </div>
-              </form>
-            </section>
+                    <div class="dashboard-actions">
+                      <button type="submit" class="btn btn--primary">ذخیره و به‌روزرسانی آگهی (نمونه)</button>
+                      <button type="button" class="btn btn--ghost">ذخیره پیش‌نویس (نمونه)</button>
+                      <a class="btn btn--ghost" href="business.html">پیش‌نمایش</a>
+                    </div>
+                  </form>
+                </section>
 
-            <section class="dashboard-panel" id="package" aria-labelledby="package-heading">
-              <h2 id="package-heading">بسته تبلیغاتی</h2>
-              <p>بسته فعلی شما: <strong>ویژه</strong> — شامل برچسب ویژه، اولویت جستجو و نمایش در خانه.</p>
-              <p class="field-hint">برای ارتقا به حرفه‌ای (بنرها و ستون کنار پروفایل) از صفحه بسته‌ها اقدام کنید.</p>
-              <div class="dashboard-actions dashboard-actions--inline">
-                <a class="btn btn--accent" href="advertise.html">مشاهده و ارتقای بسته</a>
+                <section class="dashboard-panel" id="package" aria-labelledby="package-heading">
+                  <h2 id="package-heading">بسته تبلیغاتی</h2>
+                  <p>بسته فعلی شما: <strong>ویژه</strong> — شامل برچسب ویژه، اولویت جستجو و نمایش در خانه.</p>
+                  <p class="field-hint">برای ارتقا به حرفه‌ای (بنرها و ستون کنار پروفایل) از صفحه بسته‌ها اقدام کنید.</p>
+                  <div class="dashboard-actions dashboard-actions--inline">
+                    <a class="btn btn--accent" href="advertise.html">مشاهده و ارتقای بسته</a>
+                  </div>
+                </section>
+
+                <section class="dashboard-panel" id="media" aria-labelledby="media-heading">
+                  <h2 id="media-heading">تصاویر</h2>
+                  <div class="form-grid">
+                    <div class="field field--block">
+                      <label for="dash-logo">لوگو</label>
+                      <input type="file" id="dash-logo" name="logo" accept="image/*" />
+                      <p class="field-hint">آپلود واقعی در فاز بعدی؛ الان فقط انتخاب فایل در مرورگر.</p>
+                    </div>
+                    <div class="field field--block">
+                      <label for="dash-cover">تصویر کاور</label>
+                      <input type="file" id="dash-cover" name="cover" accept="image/*" />
+                    </div>
+                    <div class="field field--block">
+                      <label for="dash-gallery">گالری (چند فایل)</label>
+                      <input type="file" id="dash-gallery" name="gallery" accept="image/*" multiple />
+                    </div>
+                  </div>
+                </section>
               </div>
-            </section>
-
-            <section class="dashboard-panel" id="media" aria-labelledby="media-heading">
-              <h2 id="media-heading">تصاویر</h2>
-              <div class="form-grid">
-                <div class="field field--block">
-                  <label for="dash-logo">لوگو</label>
-                  <input type="file" id="dash-logo" name="logo" accept="image/*" />
-                  <p class="field-hint">آپلود واقعی در فاز بعدی؛ الان فقط انتخاب فایل در مرورگر.</p>
-                </div>
-                <div class="field field--block">
-                  <label for="dash-cover">تصویر کاور</label>
-                  <input type="file" id="dash-cover" name="cover" accept="image/*" />
-                </div>
-                <div class="field field--block">
-                  <label for="dash-gallery">گالری (چند فایل)</label>
-                  <input type="file" id="dash-gallery" name="gallery" accept="image/*" multiple />
-                </div>
-              </div>
-            </section>
+            </div>
           </div>
         </div>
       </div>
-    </main>
+    </div>
 
-    <footer class="site-footer">
-      <div class="site-footer__grid">
-        <div>
-          <h2 class="site-footer__title">ایرانیو</h2>
-          <p>فهرست کسب‌وکارهای فارسی‌زبان در بریتانیا؛ برای کاربران و صاحبان کسب‌وکار.</p>
-        </div>
-        <div>
-          <h2 class="site-footer__title">کاربران</h2>
-          <ul>
-            <li><a href="listings.html">جستجوی کسب‌وکار</a></li>
-            <li><a href="index.html">خانه</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="site-footer__title">صاحبان کسب‌وکار</h2>
-          <ul>
-            <li><a href="dashboard.html">پنل و ویرایش آگهی</a></li>
-            <li><a href="advertise.html">بسته‌های تبلیغاتی</a></li>
-            <li><a href="advertise.html#inquiry">درخواست مشاوره</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="site-footer__bottom">
-        © ۲۰۲۶ ایرانیو — فهرست کسب‌وکارهای ایرانی در بریتانیا
-      </div>
-    </footer>
-    <nav class="app-dock" aria-label="ناوبری سریع">
-      <a href="index.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">🏠</span><span class="app-dock__lbl">خانه</span></a>
-      <a href="listings.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">📋</span><span class="app-dock__lbl">لیست</span></a>
-      <a href="advertise.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">📣</span><span class="app-dock__lbl">آگهی</span></a>
-      <a href="dashboard.html" class="app-dock__item app-dock__item--active" aria-current="page"><span class="app-dock__ico" aria-hidden="true">⚙️</span><span class="app-dock__lbl">پنل</span></a>
-    </nav>
+    <script>
+      window.IRANIU_CHAT = window.IRANIU_CHAT || { relayUrl: '' };
+    </script>
+    <script src="js/chat-widget.js" defer></script>
   </body>
 </html>

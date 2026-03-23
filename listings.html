@@ -13,7 +13,8 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body class="has-app-dock">
+  <body>
+    <script src="js/require-mobile.js"></script>
     <a class="skip-link" href="#main">پرش به محتوا</a>
     <header class="site-header">
       <div class="site-header__inner">
@@ -45,16 +46,133 @@
     <main id="main">
       <section class="section container listings-page listings-page--plain">
         <h1 class="visually-hidden">لیست کسب‌وکارها</h1>
+
+        <form
+          id="listings-search-form"
+          class="listings-search"
+          action="listings.html"
+          method="get"
+          role="search"
+          aria-label="جستجو و فیلتر پیشرفته کسب‌وکارها"
+        >
+          <input type="hidden" name="adv" value="" id="listings-adv-flag" />
+          <div class="listings-search__row">
+            <div class="field field--q">
+              <label for="listings-q">نام یا کلمه کلیدی</label>
+              <input
+                type="search"
+                id="listings-q"
+                name="q"
+                placeholder="مثلاً رستوران، وکیل، سوپرمارکت…"
+                autocomplete="off"
+              />
+            </div>
+            <div class="field">
+              <label for="listings-city">شهر</label>
+              <select id="listings-city" name="city" aria-label="شهر">
+                <option value="">همه شهرها</option>
+                <option value="london">لندن</option>
+                <option value="manchester">منچستر</option>
+                <option value="birmingham">برمنگام</option>
+                <option value="glasgow">گلاسگو</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="listings-cat">دسته</label>
+              <select id="listings-cat" name="cat" aria-label="دسته">
+                <option value="">همه دسته‌ها</option>
+                <option value="food">غذا و رستوران</option>
+                <option value="market">سوپرمارکت و مواد غذایی</option>
+                <option value="health">سلامت و پزشکی</option>
+                <option value="legal">حقوقی و مهاجرت</option>
+                <option value="beauty">زیبایی و آرایشگاه</option>
+                <option value="auto">خودرو و سرویس</option>
+              </select>
+            </div>
+            <div class="listings-search__actions">
+              <button type="submit" class="btn btn--primary">اعمال فیلتر</button>
+              <button
+                type="button"
+                class="btn btn--ghost listings-search__adv-toggle"
+                id="listings-adv-toggle"
+                aria-expanded="false"
+                aria-controls="listings-advanced-panel"
+              >
+                جستجوی پیشرفته
+              </button>
+            </div>
+          </div>
+
+          <div id="listings-advanced-panel" class="listings-search__advanced" hidden>
+            <div class="listings-search__advanced-grid">
+              <div class="field">
+                <label for="listings-sort">مرتب‌سازی</label>
+                <select id="listings-sort" name="sort" aria-label="مرتب‌سازی">
+                  <option value="relevance">مرتبط‌ترین (پیش‌فرض)</option>
+                  <option value="distance">نزدیک‌ترین (با موقعیت من)</option>
+                  <option value="name">نام</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="listings-radius">شعاع از موقعیت من</label>
+                <select id="listings-radius" name="radius_km" aria-label="شعاع کیلومتر">
+                  <option value="5">۵ کیلومتر</option>
+                  <option value="10">۱۰ کیلومتر</option>
+                  <option value="25" selected>۲۵ کیلومتر</option>
+                  <option value="50">۵۰ کیلومتر</option>
+                  <option value="100">۱۰۰ کیلومتر</option>
+                </select>
+                <p class="field-hint">پس از زدن «موقعیت من» اعمال می‌شود.</p>
+              </div>
+              <div class="field">
+                <label class="listings-search__check" for="listings-featured">
+                  <input type="checkbox" name="featured" id="listings-featured" value="1" />
+                  فقط آگهی‌های ویژه
+                </label>
+              </div>
+              <div class="field">
+                <label class="listings-search__check" for="listings-has-web">
+                  <input type="checkbox" name="has_website" id="listings-has-web" value="1" />
+                  فقط دارای وب‌سایت
+                </label>
+              </div>
+            </div>
+            <input type="hidden" name="user_lat" id="listings-user-lat" value="" />
+            <input type="hidden" name="user_lng" id="listings-user-lng" value="" />
+            <div class="listings-search__geo-row">
+              <button type="button" class="btn btn--ghost" id="listings-geo-btn">
+                استفاده از موقعیت من
+              </button>
+            </div>
+            <p class="listings-search__geo-status" id="listings-geo-status" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
         <div class="ad-slot ad-slot--banner" role="complementary" aria-label="جای تبلیغ">
           جای تبلیغ
         </div>
 
         <div class="listings-toolbar">
-          <p class="listings-toolbar__count">نمایش ۴ مورد از ۴ کسب‌وکار — <strong>نمونهٔ طراحی (HTML ثابت)</strong></p>
+          <p class="listings-toolbar__count" data-listings-count="">
+            نمایش <strong>۴</strong> مورد از <strong>۴</strong> کسب‌وکار
+          </p>
+          <p class="listings-toolbar__status">فیلترها روی همین صفحه اعمال می‌شوند (نمونه بدون سرور).</p>
         </div>
         <div class="listings-results-root">
+          <p class="listings-empty" id="listings-empty-state" hidden>
+            هیچ کسب‌وکاری با این فیلترها پیدا نشد. فیلترها را کم کنید یا موقعیت/شعاع را تغییر دهید.
+          </p>
           <div class="listing-cards">
-            <article class="listing-card">
+            <article
+              class="listing-card"
+              data-cat="food"
+              data-city="london"
+              data-promoted="1"
+              data-lat="51.4994"
+              data-lng="-0.194"
+              data-has-website="1"
+              data-search-text="رستوران سفره غذا رستوران food london لندن"
+            >
               <a class="listing-card__media" href="business.html" tabindex="-1" aria-hidden="true"
                 ><img
                   class="listing-card__img"
@@ -65,7 +183,7 @@
               <div class="listing-card__body">
                 <h2 class="listing-card__title"><a href="business.html">رستوران سفره</a></h2>
                 <p class="listing-card__cats">غذا و رستوران · ایرانی</p>
-                <p class="listing-card__line"><span class="listing-card__label">تماس</span> 020 1234 5678 · 07900 000001</p>
+                <p class="listing-card__line"><span class="listing-card__label">تماس</span> <span class="phone-ltr" dir="ltr">020 1234 5678 · 07900 000001</span></p>
                 <p class="listing-card__line"><span class="listing-card__label">آدرس</span> ۱۲۳ نمونه خیابان، کنزینگتون، لندن، W8 5EX</p>
                 <p class="listing-card__links">
                   <a class="listing-card__link" href="https://example.co.uk" target="_blank" rel="noopener noreferrer">وب‌سایت</a
@@ -78,7 +196,16 @@
                 </div>
               </div>
             </article>
-            <article class="listing-card">
+            <article
+              class="listing-card"
+              data-cat="health"
+              data-city="manchester"
+              data-promoted="1"
+              data-lat="53.4808"
+              data-lng="-2.2426"
+              data-has-website="1"
+              data-search-text="کلینیک پارس سلامت پزشکی health manchester منچستر"
+            >
               <a class="listing-card__media" href="business-claimed.html" tabindex="-1" aria-hidden="true"
                 ><img
                   class="listing-card__img"
@@ -89,7 +216,7 @@
               <div class="listing-card__body">
                 <h2 class="listing-card__title"><a href="business-claimed.html">کلینیک پارس</a></h2>
                 <p class="listing-card__cats">سلامت · پزشکی خانواده</p>
-                <p class="listing-card__line"><span class="listing-card__label">تماس</span> 0161 123 4567</p>
+                <p class="listing-card__line"><span class="listing-card__label">تماس</span> <span class="phone-ltr" dir="ltr">0161 123 4567</span></p>
                 <p class="listing-card__line"><span class="listing-card__label">آدرس</span> ۴۵ نمونه رد، منچستر، M1 2AB</p>
                 <p class="listing-card__links">
                   <a class="listing-card__link" href="https://example.uk" target="_blank" rel="noopener noreferrer">وب‌سایت</a
@@ -102,14 +229,23 @@
                 </div>
               </div>
             </article>
-            <article class="listing-card">
+            <article
+              class="listing-card"
+              data-cat="market"
+              data-city="manchester"
+              data-promoted="0"
+              data-lat="53.457"
+              data-lng="-2.226"
+              data-has-website="1"
+              data-search-text="سوپرمارکت برکت market منچستر"
+            >
               <a class="listing-card__media" href="business.html" tabindex="-1" aria-hidden="true"
                 ><div class="listing-card__placeholder" aria-hidden="true"></div
               ></a>
               <div class="listing-card__body">
                 <h2 class="listing-card__title"><a href="business.html">سوپرمارکت برکت</a></h2>
                 <p class="listing-card__cats">سوپرمارکت · مواد غذایی</p>
-                <p class="listing-card__line"><span class="listing-card__label">تماس</span> 0161 987 6543 · 07900 000002</p>
+                <p class="listing-card__line"><span class="listing-card__label">تماس</span> <span class="phone-ltr" dir="ltr">0161 987 6543 · 07900 000002</span></p>
                 <p class="listing-card__line"><span class="listing-card__label">آدرس</span> ۷۸ ویلمس لو، منچستر، M14 5ZZ</p>
                 <p class="listing-card__links">
                   <a class="listing-card__link" href="https://instagram.com" target="_blank" rel="noopener noreferrer">اینستاگرام</a>
@@ -120,7 +256,16 @@
                 </div>
               </div>
             </article>
-            <article class="listing-card">
+            <article
+              class="listing-card"
+              data-cat="legal"
+              data-city="london"
+              data-promoted="0"
+              data-lat="51.5155"
+              data-lng="-0.0922"
+              data-has-website="1"
+              data-search-text="دفتر وکالت آریا حقوقی legal london لندن"
+            >
               <a class="listing-card__media" href="business.html" tabindex="-1" aria-hidden="true"
                 ><img
                   class="listing-card__img"
@@ -131,7 +276,7 @@
               <div class="listing-card__body">
                 <h2 class="listing-card__title"><a href="business.html">دفتر وکالت آریا</a></h2>
                 <p class="listing-card__cats">حقوقی · مهاجرت و خانواده</p>
-                <p class="listing-card__line"><span class="listing-card__label">تماس</span> 020 9999 8888</p>
+                <p class="listing-card__line"><span class="listing-card__label">تماس</span> <span class="phone-ltr" dir="ltr">020 9999 8888</span></p>
                 <p class="listing-card__line"><span class="listing-card__label">آدرس</span> ۱۰ خیابان حقوق، لندن، EC1A 1BB</p>
                 <p class="listing-card__links">
                   <a class="listing-card__link" href="https://example.uk" target="_blank" rel="noopener noreferrer">وب‌سایت</a
@@ -149,37 +294,10 @@
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="site-footer__grid">
-        <div>
-          <h2 class="site-footer__title">ایرانیو</h2>
-          <p>فهرست کسب‌وکارهای فارسی‌زبان در بریتانیا؛ برای کاربران و صاحبان کسب‌وکار.</p>
-        </div>
-        <div>
-          <h2 class="site-footer__title">کاربران</h2>
-          <ul>
-            <li><a href="listings.html">جستجوی کسب‌وکار</a></li>
-            <li><a href="index.html">خانه</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="site-footer__title">صاحبان کسب‌وکار</h2>
-          <ul>
-            <li><a href="dashboard.html">پنل و ویرایش آگهی</a></li>
-            <li><a href="advertise.html">بسته‌های تبلیغاتی</a></li>
-            <li><a href="advertise.html#inquiry">درخواست مشاوره</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="site-footer__bottom">
-        © ۲۰۲۶ ایرانیو — فهرست کسب‌وکارهای ایرانی در بریتانیا
-      </div>
-    </footer>
-    <nav class="app-dock" aria-label="ناوبری سریع">
-      <a href="index.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">🏠</span><span class="app-dock__lbl">خانه</span></a>
-      <a href="listings.html" class="app-dock__item app-dock__item--active" aria-current="page"><span class="app-dock__ico" aria-hidden="true">📋</span><span class="app-dock__lbl">لیست</span></a>
-      <a href="advertise.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">📣</span><span class="app-dock__lbl">آگهی</span></a>
-      <a href="dashboard.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">⚙️</span><span class="app-dock__lbl">پنل</span></a>
-    </nav>
+    <script src="js/listings-search.js" defer></script>
+    <script>
+      window.IRANIU_CHAT = window.IRANIU_CHAT || { relayUrl: '' };
+    </script>
+    <script src="js/chat-widget.js" defer></script>
   </body>
 </html>

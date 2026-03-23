@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#3a0b47" />
+    <title>افزودن آگهی — سوپرادمین — ایرانیو</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body class="app-shell-body">
+    <script src="js/require-mobile.js"></script>
+    <a class="skip-link" href="#main">پرش به محتوا</a>
+
+    <main id="main" class="app-shell">
+      <input type="checkbox" id="admin-shell-sidebar-toggle" class="app-shell-sidebar-cb" />
+      <label
+        class="app-shell__sidebar-overlay"
+        for="admin-shell-sidebar-toggle"
+        aria-hidden="true"
+      ></label>
+      <aside class="app-shell__sidebar" aria-label="منوی ادمین">
+        <a class="app-shell__brand" href="index.html">
+          <span class="app-shell__brand-mark" aria-hidden="true">ای</span>
+          <span>ایرانیو</span>
+        </a>
+        <p class="app-shell__nav-title">سوپرادمین</p>
+        <ul class="app-shell__nav">
+          <li>
+            <a href="admin.html">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+                />
+                <path stroke="currentColor" stroke-width="2" d="M9 22V12h6v10" />
+              </svg>
+              داشبورد
+            </a>
+          </li>
+          <li>
+            <a href="admin-businesses.html">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"
+                />
+              </svg>
+              همه آگهی‌ها
+            </a>
+          </li>
+          <li>
+            <a href="admin-edit.html">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"
+                />
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
+                />
+              </svg>
+              ویرایش آگهی
+            </a>
+          </li>
+          <li>
+            <a href="admin-add.html" aria-current="page">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path stroke="currentColor" stroke-width="2" d="M12 5v14M5 12h14" />
+              </svg>
+              افزودن آگهی
+            </a>
+          </li>
+          <li>
+            <a href="admin-claims.html">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                />
+                <circle cx="8.5" cy="7" r="4" stroke="currentColor" stroke-width="2" />
+                <path stroke="currentColor" stroke-width="2" d="M20 8v6M23 11h-6" />
+              </svg>
+              درخواست‌های ادعا
+            </a>
+          </li>
+          <li>
+            <a href="admin-link.html">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"
+                />
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"
+                />
+              </svg>
+              لینک آگهی ↔ مدیر
+            </a>
+          </li>
+          <li>
+            <a href="admin-billing.html">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect
+                  x="1"
+                  y="4"
+                  width="22"
+                  height="16"
+                  rx="2"
+                  ry="2"
+                  stroke="currentColor"
+                  stroke-width="2"
+                />
+                <path stroke="currentColor" stroke-width="2" d="M1 10h22" />
+              </svg>
+              صورت‌حساب
+            </a>
+          </li>
+          <li>
+            <a href="admin-managers.html">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"
+                />
+                <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2" />
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
+                />
+              </svg>
+              حساب‌های مدیر
+            </a>
+          </li>
+          <li>
+            <a href="admin-chat-log.html">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
+                />
+              </svg>
+              گفتگو و لاگ سایت
+            </a>
+          </li>
+        </ul>
+        <div class="app-shell__sidebar-foot">
+          <a href="index.html">بازگشت به سایت عمومی</a>
+        </div>
+      </aside>
+
+      <div class="app-shell__body">
+        <header class="app-shell__header">
+          <label
+            for="admin-shell-sidebar-toggle"
+            class="app-shell__sidebar-toggle"
+            aria-label="باز و بسته کردن منو"
+          >
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path stroke="currentColor" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </label>
+          <div class="app-shell__header-text">
+            <h1>افزودن آگهی</h1>
+            <p>ثبت آگهی جدید بدون مالک</p>
+          </div>
+          <div class="app-shell__search-wrap">
+            <label class="visually-hidden" for="admin-global-search">جستجو در پنل</label>
+            <input
+              type="search"
+              id="admin-global-search"
+              class="app-shell__search"
+              placeholder="جستجو در آگهی‌ها و مدیران…"
+              autocomplete="off"
+            />
+          </div>
+          <div class="app-shell__header-actions">
+            <button type="button" class="app-shell__icon-btn" aria-label="اعلان‌ها">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path
+                  stroke="currentColor"
+                  stroke-width="2"
+                  d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"
+                />
+                <path stroke="currentColor" stroke-width="2" d="M13.73 21a2 2 0 0 1-3.46 0" />
+              </svg>
+            </button>
+            <div class="app-shell__user">
+              <div class="app-shell__user-avatar" aria-hidden="true">م</div>
+              <div class="app-shell__user-text">
+                <strong>سوپرادمین</strong>
+                <small>ایرانیو</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <div class="app-shell__scroll">
+          <div class="admin-wrap">
+            <p class="admin-back-link"><a href="admin.html">بازگشت به داشبورد</a></p>
+
+            <section class="admin-panel" id="admin-add-business" aria-labelledby="add-h">
+              <div class="admin-panel__head">
+                <h2 id="add-h">افزودن آگهی جدید (بدون مالک)</h2>
+                <button
+                  type="button"
+                  class="btn btn--ghost admin-detail-trigger"
+                  data-detail-type="help"
+                  data-detail-title="راهنمای افزودن آگهی"
+                  data-detail-id="help-add"
+                  data-detail-status="راهنما"
+                  data-detail-lines="جریان::آگهی بدون مالک در فهرست||ادعا::مدیر با Google ثبت‌نام می‌کند||سوپرادمین::درخواست ادعا را بررسی و لینک می‌کند"
+                >
+                  راهنما (مودال)
+                </button>
+              </div>
+              <p class="field-hint">
+                آگهی‌های جدید ابتدا بدون مالک در فهرست ظاهر می‌شوند؛ دکمهٔ «ادعای مالکیت» فقط برای همین حالت
+                به بازدیدکننده نشان داده می‌شود. فیلدهای زیر با بخش‌های صفحهٔ عمومی کسب‌وکار (درباره، ساعات، تماس،
+                نقشه و گالری) هم‌راستا هستند.
+              </p>
+              <form action="#" method="post" id="admin-add-business-form">
+                <div class="form-grid">
+                  <h3 class="admin-form-section">اطلاعات پایه و فهرست</h3>
+                  <div class="field">
+                    <label for="ad-name">نام کسب‌وکار</label>
+                    <input type="text" id="ad-name" name="name" required placeholder="مثلاً رستوران سفره" />
+                  </div>
+                  <div class="field">
+                    <label for="ad-slug">نامک URL (انگلیسی)</label>
+                    <input type="text" id="ad-slug" name="slug" lang="en" placeholder="safereh-restaurant" />
+                  </div>
+                  <div class="field field--block">
+                    <label for="ad-tagline">شعار زیر عنوان (زیر نام در پروفایل)</label>
+                    <input
+                      type="text"
+                      id="ad-tagline"
+                      name="tagline"
+                      placeholder="مثلاً غذای ایرانی و کباب"
+                    />
+                  </div>
+                  <div class="field">
+                    <label for="ad-city">شهر (نمایش در زیرعنوان)</label>
+                    <select id="ad-city" name="city">
+                      <option>London</option>
+                      <option>Manchester</option>
+                      <option>Birmingham</option>
+                      <option>Edinburgh</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="ad-cat">دسته</label>
+                    <select id="ad-cat" name="category">
+                      <option value="food">غذا و رستوران</option>
+                      <option value="health">سلامت</option>
+                      <option value="market">سوپرمارکت</option>
+                      <option value="legal">حقوقی</option>
+                      <option value="beauty">زیبایی</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="ad-plan">بسته تبلیغاتی اولیه</label>
+                    <select id="ad-plan" name="plan">
+                      <option value="basic">پایه</option>
+                      <option value="featured" selected>ویژه</option>
+                      <option value="pro">حرفه‌ای</option>
+                    </select>
+                  </div>
+                  <div class="field">
+                    <label for="ad-rating">امتیاز نمایشی (۰–۵)</label>
+                    <input
+                      type="text"
+                      id="ad-rating"
+                      name="rating_display"
+                      inputmode="decimal"
+                      placeholder="۴٫۸"
+                    />
+                  </div>
+                  <div class="field">
+                    <label for="ad-open-until">متن «باز تا» در هدر پروفایل</label>
+                    <input type="text" id="ad-open-until" name="open_until_label" placeholder="۲۳:۰۰" />
+                  </div>
+
+                  <h3 class="admin-form-section">ظاهر پروفایل (کاور، لوگو، گالری)</h3>
+                  <div class="field">
+                    <label for="ad-logo-letter">حرف آواتار لوگو (یک نویسه)</label>
+                    <input type="text" id="ad-logo-letter" name="logo_letter" maxlength="1" placeholder="س" />
+                  </div>
+                  <div class="field field--block">
+                    <label for="ad-cover-url">آدرس تصویر کاور (پس‌زمینهٔ هدر)</label>
+                    <input
+                      type="url"
+                      id="ad-cover-url"
+                      name="cover_image_url"
+                      lang="en"
+                      placeholder="https://…"
+                    />
+                  </div>
+                  <div class="field field--block">
+                    <label for="ad-logo-url">آدرس تصویر لوگو (اختیاری؛ اگر خالی باشد از حرف آواتار استفاده می‌شود)</label>
+                    <input type="url" id="ad-logo-url" name="logo_image_url" lang="en" placeholder="https://…" />
+                  </div>
+                  <div class="field field--block">
+                    <label for="ad-gallery-urls">آدرس تصاویر گالری (یک URL در هر خط، حداکثر ۴)</label>
+                    <textarea
+                      id="ad-gallery-urls"
+                      name="gallery_urls"
+                      rows="4"
+                      placeholder="https://تصویر-۱…&#10;https://تصویر-۲…"
+                    ></textarea>
+                  </div>
+
+                  <h3 class="admin-form-section">درباره کسب‌وکار</h3>
+                  <div class="field field--block">
+                    <label for="ad-desc">متن کامل «درباره کسب‌وکار»</label>
+                    <textarea id="ad-desc" name="description" rows="5" placeholder="معرفی، خدمات، رزرو…"></textarea>
+                  </div>
+
+                  <h3 class="admin-form-section">ساعات کاری (هر روز؛ خالی = بسته یا نامشخص)</h3>
+                  <div class="field">
+                    <label for="ad-hours-sat">شنبه</label>
+                    <input type="text" id="ad-hours-sat" name="hours_saturday" placeholder="۱۲:۰۰–۲۳:۰۰" />
+                  </div>
+                  <div class="field">
+                    <label for="ad-hours-sun">یکشنبه</label>
+                    <input type="text" id="ad-hours-sun" name="hours_sunday" placeholder="۱۲:۰۰–۲۲:۰۰" />
+                  </div>
+                  <div class="field">
+                    <label for="ad-hours-mon">دوشنبه</label>
+                    <input type="text" id="ad-hours-mon" name="hours_monday" placeholder="۱۲:۰۰–۲۳:۰۰" />
+                  </div>
+                  <div class="field">
+                    <label for="ad-hours-tue">سه‌شنبه</label>
+                    <input type="text" id="ad-hours-tue" name="hours_tuesday" placeholder="" />
+                  </div>
+                  <div class="field">
+                    <label for="ad-hours-wed">چهارشنبه</label>
+                    <input type="text" id="ad-hours-wed" name="hours_wednesday" placeholder="" />
+                  </div>
+                  <div class="field">
+                    <label for="ad-hours-thu">پنجشنبه</label>
+                    <input type="text" id="ad-hours-thu" name="hours_thursday" placeholder="" />
+                  </div>
+                  <div class="field">
+                    <label for="ad-hours-fri">جمعه</label>
+                    <input type="text" id="ad-hours-fri" name="hours_friday" placeholder="۱۴:۰۰–۲۳:۰۰" />
+                  </div>
+
+                  <h3 class="admin-form-section">موقعیت و نقشه</h3>
+                  <div class="field field--block">
+                    <label for="ad-address">آدرس کامل (نمایش و تطبیق با نقشه)</label>
+                    <input
+                      type="text"
+                      id="ad-address"
+                      name="address"
+                      placeholder="۱۲۳ نمونه خیابان، کنزینگتون، لندن"
+                    />
+                  </div>
+                  <div class="field">
+                    <label for="ad-lat">عرض جغرافیایی (اختیاری)</label>
+                    <input type="text" id="ad-lat" name="latitude" lang="en" inputmode="decimal" placeholder="51.5074" />
+                  </div>
+                  <div class="field">
+                    <label for="ad-lng">طول جغرافیایی (اختیاری)</label>
+                    <input type="text" id="ad-lng" name="longitude" lang="en" inputmode="decimal" placeholder="-0.1278" />
+                  </div>
+                  <div class="field field--block">
+                    <label for="ad-maps-dir">لینک مسیریابی Google Maps</label>
+                    <input
+                      type="url"
+                      id="ad-maps-dir"
+                      name="maps_directions_url"
+                      lang="en"
+                      placeholder="https://maps.google.com/…"
+                    />
+                  </div>
+
+                  <h3 class="admin-form-section">تماس و شبکه‌های اجتماعی</h3>
+                  <div class="field">
+                    <label for="ad-phone">تلفن</label>
+                    <input type="tel" id="ad-phone" name="phone" placeholder="020 1234 5678" />
+                  </div>
+                  <div class="field">
+                    <label for="ad-tel-e164">شماره تماس برای لینک tel (E.164، اختیاری)</label>
+                    <input type="text" id="ad-tel-e164" name="phone_e164" lang="en" placeholder="+442012345678" />
+                  </div>
+                  <div class="field">
+                    <label for="ad-email">ایمیل نمایشی</label>
+                    <input type="email" id="ad-email" name="email" placeholder="hello@example.com" />
+                  </div>
+                  <div class="field">
+                    <label for="ad-web">وب‌سایت</label>
+                    <input type="url" id="ad-web" name="website" lang="en" placeholder="https://example.co.uk" />
+                  </div>
+                  <div class="field">
+                    <label for="ad-insta">اینستاگرام</label>
+                    <input type="text" id="ad-insta" name="instagram" placeholder="@safereh_london" />
+                  </div>
+                  <div class="field">
+                    <label for="ad-telegram">تلگرام (نام کاربری بدون @)</label>
+                    <input type="text" id="ad-telegram" name="telegram_username" lang="en" placeholder="safereh_info" />
+                  </div>
+                  <div class="field">
+                    <label for="ad-whatsapp">واتساپ (فقط ارقام کشور + شماره، بدون +)</label>
+                    <input
+                      type="text"
+                      id="ad-whatsapp"
+                      name="whatsapp_e164"
+                      lang="en"
+                      inputmode="numeric"
+                      placeholder="442012345678"
+                    />
+                  </div>
+
+                  <h3 class="admin-form-section">Google Business و نمایش در سایت</h3>
+                  <div class="field field--block">
+                    <label for="ad-gbp">لینک پروفایل Google Business (مرجع تأیید ادعا)</label>
+                    <input
+                      type="url"
+                      id="ad-gbp"
+                      name="google_business_profile_url"
+                      lang="en"
+                      placeholder="https://maps.app.goo.gl/…"
+                    />
+                  </div>
+                  <div class="field field--block">
+                    <label>
+                      <input type="checkbox" id="ad-featured-home" name="featured_home" />
+                      نمایش در بلوک ویژهٔ صفحهٔ اصلی
+                    </label>
+                  </div>
+                  <div class="field field--block">
+                    <label>
+                      <input type="checkbox" id="ad-priority-search" name="priority_search" />
+                      اولویت بالاتر در جستجو
+                    </label>
+                  </div>
+                  <p class="field-hint field-hint--full">
+                    وضعیت «بدون مالک» برای آگهی‌های تازه از این فرم به‌صورت پیش‌فرض فعال است تا بنر ادعا و دکمهٔ
+                    «ادعای مالکیت» در سایت عمومی دیده شود.
+                  </p>
+                </div>
+                <div class="admin-form-actions">
+                  <button type="submit" class="btn btn--primary">ثبت آگهی در سیستم (نمونه)</button>
+                </div>
+              </form>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div
+      id="admin-detail-modal"
+      class="admin-detail-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="adm-modal-title"
+      hidden
+      dir="rtl"
+      lang="fa"
+    >
+      <div class="admin-detail-modal__backdrop" data-admin-detail-dismiss tabindex="-1"></div>
+      <div class="admin-detail-modal__panel">
+        <button type="button" class="admin-detail-modal__close" aria-label="بستن پنجره">
+          <span aria-hidden="true">×</span>
+        </button>
+        <p class="admin-detail-modal__type" id="adm-modal-type"></p>
+        <h2 id="adm-modal-title" class="admin-detail-modal__title"></h2>
+        <div id="adm-modal-body" class="admin-detail-modal__body"></div>
+        <div class="admin-detail-modal__fields">
+          <div class="field field--block">
+            <label for="adm-modal-note">یادداشت ادمین (داخلی)</label>
+            <textarea id="adm-modal-note" rows="3" placeholder="برای ذخیرهٔ بعدی در بک‌اند…"></textarea>
+          </div>
+          <div class="field field--block" id="adm-modal-reject-wrap">
+            <label for="adm-modal-reject">دلیل رد / توقف</label>
+            <textarea
+              id="adm-modal-reject"
+              rows="2"
+              placeholder="برای رد آگهی، ادعا، فاکتور یا حساب الزامی است."
+            ></textarea>
+          </div>
+        </div>
+        <p id="adm-modal-toast" class="admin-detail-modal__toast" role="status" aria-live="polite" hidden></p>
+        <div class="admin-detail-modal__primary-actions">
+          <button type="button" class="btn btn--primary" data-admin-action="accept">پذیرش</button>
+          <button type="button" class="btn btn--danger" data-admin-action="reject">رد</button>
+        </div>
+        <div class="admin-detail-modal__tools">
+          <span class="admin-detail-modal__tools-label">ابزارهای تکمیلی</span>
+          <div class="admin-detail-modal__tools-row">
+            <button type="button" class="btn btn--ghost" data-admin-tool="note">ذخیرهٔ یادداشت</button>
+            <button type="button" class="btn btn--ghost" data-admin-tool="copy">کپی شناسه</button>
+            <button type="button" class="btn btn--ghost" data-admin-tool="profile" hidden>پروفایل عمومی</button>
+            <button type="button" class="btn btn--ghost" data-admin-tool="gbp" hidden>Google Business</button>
+            <button type="button" class="btn btn--ghost" data-admin-tool="email" hidden>ارسال ایمیل</button>
+            <button type="button" class="btn btn--ghost" data-admin-tool="suspend">تعلیق موقت</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/admin-detail-modal.js" defer></script>
+  </body>
+</html>

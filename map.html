@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#3a0b47" />
+    <title>نقشهٔ کسب‌وکارها — ایرانیو</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+  </head>
+  <body class="page-map">
+    <script src="js/require-mobile.js"></script>
+    <a class="skip-link" href="#main">پرش به محتوا</a>
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="logo" href="index.html">
+          <span class="logo__mark" aria-hidden="true">ای</span>
+          <span>ایرانیو</span>
+        </a>
+        <input type="checkbox" id="site-nav-toggle" class="site-nav-cb" />
+        <label for="site-nav-toggle" class="nav-toggle" aria-label="باز و بسته کردن منو">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+        <nav class="nav" id="site-nav" aria-label="اصلی">
+          <ul class="nav__links">
+            <li><a href="index.html">خانه</a></li>
+            <li><a href="listings.html">لیست کسب‌وکارها</a></li>
+            <li><a href="map.html" aria-current="page">نقشه</a></li>
+            <li><a href="advertise.html">تبلیغات و بسته‌ها</a></li>
+            <li><a href="dashboard.html">پنل کسب‌وکار</a></li>
+          </ul>
+          <div class="nav__cta">
+            <a class="btn btn--ghost" href="advertise.html">ثبت کسب‌وکار</a>
+            <a class="btn btn--primary" href="listings.html">جستجو</a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="section map-section map-section--full" aria-labelledby="map-section-title" id="map-section">
+        <div class="map-section__glow" aria-hidden="true"></div>
+        <div class="map-section__top container">
+          <div class="map-section__intro">
+            <p class="map-section__eyebrow">OpenStreetMap</p>
+            <h1 id="map-section-title" class="section__title map-section__title">نقشهٔ کسب‌وکارها</h1>
+            <p class="map-section__lead map-section__lead--compact">
+              دادهٔ خیابان از مشارکت‌کنندگان OpenStreetMap است؛ روی هر پین بزنید تا جزئیات و لینک پروفایل باز شود.
+            </p>
+            <p class="map-section__back-wrap">
+              <a class="map-section__back" href="index.html">بازگشت به خانه</a>
+            </p>
+          </div>
+          <div class="map-section__legend map-section__legend--bar" aria-hidden="true">
+            <span class="map-section__legend-item"
+              ><span class="map-pin map-pin--legend"></span> عادی</span
+            >
+            <span class="map-section__legend-item"
+              ><span class="map-pin map-pin--ad map-pin--legend"></span> آگهی ویژه</span
+            >
+          </div>
+          <div class="map-section__filters" role="search" aria-label="فیلتر نقشه">
+            <label for="map-filter-cat" class="visually-hidden">دسته</label>
+            <select id="map-filter-cat" class="map-section__filter-select" aria-label="دسته">
+              <option value="">همه دسته‌ها</option>
+              <option value="food">غذا و رستوران</option>
+              <option value="market">سوپرمارکت و مواد غذایی</option>
+              <option value="health">سلامت و پزشکی</option>
+              <option value="legal">حقوقی و مهاجرت</option>
+              <option value="beauty">زیبایی و آرایشگاه</option>
+              <option value="auto">خودرو و سرویس</option>
+            </select>
+            <label for="map-filter-q" class="visually-hidden">نام کسب‌وکار</label>
+            <input
+              type="search"
+              id="map-filter-q"
+              class="map-section__filter-input"
+              placeholder="نام کسب‌وکار…"
+              autocomplete="off"
+              aria-label="نام کسب‌وکار"
+            />
+            <label for="map-filter-borough" class="visually-hidden">منطقه</label>
+            <select id="map-filter-borough" class="map-section__filter-select" aria-label="منطقه (borough)">
+              <option value="">همه مناطق</option>
+              <option value="kensington-chelsea">کنزینگتون و چلسی</option>
+              <option value="camden">کمدن</option>
+              <option value="manchester-city-centre">مرکز منچستر</option>
+              <option value="rusholme">راشولم</option>
+            </select>
+            <button type="button" id="map-filter-reset" class="btn btn--ghost map-section__filter-reset">
+              بازنشانی فیلترها
+            </button>
+          </div>
+        </div>
+        <div class="map-section__map-fullbleed" dir="ltr" lang="en">
+          <div
+            id="directory-map"
+            class="directory-map directory-map--plain"
+            role="region"
+            aria-label="نقشهٔ OpenStreetMap — کسب‌وکارهای نمونه"
+          ></div>
+        </div>
+      </section>
+    </main>
+
+
+    <div
+      id="map-business-modal"
+      class="map-business-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="map-business-modal-title"
+      hidden
+      dir="rtl"
+      lang="fa"
+    >
+      <div class="map-business-modal__backdrop" data-map-modal-dismiss tabindex="-1"></div>
+      <div class="map-business-modal__panel">
+        <button type="button" class="map-business-modal__close" aria-label="بستن پنجره">
+          <span aria-hidden="true">×</span>
+        </button>
+        <span id="map-business-modal-badge" class="map-business-modal__badge" hidden>ویژه</span>
+        <div class="map-business-modal__logo-wrap">
+          <img
+            id="map-business-modal-logo"
+            class="map-business-modal__logo-img"
+            alt=""
+            width="120"
+            height="120"
+            decoding="async"
+            hidden
+          />
+          <div id="map-business-modal-logo-ph" class="map-business-modal__logo-ph" aria-hidden="true"></div>
+        </div>
+        <h2 id="map-business-modal-title" class="map-business-modal__title"></h2>
+        <p id="map-business-modal-meta" class="map-business-modal__meta"></p>
+        <a id="map-business-modal-cta" class="btn btn--primary map-business-modal__cta" href="#">مشاهدهٔ پروفایل</a>
+      </div>
+    </div>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+      defer
+    ></script>
+    <script src="js/directory-map.js" defer></script>
+    <script>
+      window.IRANIU_CHAT = window.IRANIU_CHAT || { relayUrl: '' };
+    </script>
+    <script src="js/chat-widget.js" defer></script>
+  </body>
+</html>

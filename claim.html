@@ -13,7 +13,8 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body class="has-app-dock">
+  <body>
+    <script src="js/require-mobile.js"></script>
     <a class="skip-link" href="#main">پرش به محتوا</a>
     <header class="site-header">
       <div class="site-header__inner">
@@ -21,17 +22,12 @@
           <span class="logo__mark" aria-hidden="true">ای</span>
           <span>ایرانیو</span>
         </a>
-        <button
-          type="button"
-          class="nav-toggle"
-          aria-expanded="false"
-          aria-controls="site-nav"
-          aria-label="باز کردن منو"
-        >
+        <input type="checkbox" id="site-nav-toggle" class="site-nav-cb" />
+        <label for="site-nav-toggle" class="nav-toggle" aria-label="باز و بسته کردن منو">
           <span></span>
           <span></span>
           <span></span>
-        </button>
+        </label>
         <nav class="nav" id="site-nav" aria-label="اصلی">
           <ul class="nav__links">
             <li><a href="index.html">خانه</a></li>
@@ -134,29 +130,9 @@
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="site-footer__grid">
-        <div>
-          <h2 class="site-footer__title">ایرانیو</h2>
-          <p>فهرست کسب‌وکارهای فارسی‌زبان در بریتانیا.</p>
-        </div>
-        <div>
-          <h2 class="site-footer__title">صاحبان کسب‌وکار</h2>
-          <ul>
-            <li><a href="dashboard.html">پنل</a></li>
-            <li><a href="manager-signup.html">ثبت‌نام مدیر</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="site-footer__bottom">
-        © ۲۰۲۶ ایرانیو
-      </div>
-    </footer>
-    <nav class="app-dock" aria-label="ناوبری سریع">
-      <a href="index.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">🏠</span><span class="app-dock__lbl">خانه</span></a>
-      <a href="listings.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">📋</span><span class="app-dock__lbl">لیست</span></a>
-      <a href="advertise.html" class="app-dock__item app-dock__item--active" aria-current="page"><span class="app-dock__ico" aria-hidden="true">📣</span><span class="app-dock__lbl">آگهی</span></a>
-      <a href="dashboard.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">⚙️</span><span class="app-dock__lbl">پنل</span></a>
-    </nav>
+    <script>
+      window.IRANIU_CHAT = window.IRANIU_CHAT || { relayUrl: '' };
+    </script>
+    <script src="js/chat-widget.js" defer></script>
   </body>
 </html>

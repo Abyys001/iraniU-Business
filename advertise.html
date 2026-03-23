@@ -13,7 +13,8 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body class="has-app-dock">
+  <body>
+    <script src="js/require-mobile.js"></script>
     <a class="skip-link" href="#main">پرش به محتوا</a>
     <header class="site-header">
       <div class="site-header__inner">
@@ -147,37 +148,9 @@
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="site-footer__grid">
-        <div>
-          <h2 class="site-footer__title">ایرانیو</h2>
-          <p>فهرست کسب‌وکارهای فارسی‌زبان در بریتانیا؛ برای کاربران و صاحبان کسب‌وکار.</p>
-        </div>
-        <div>
-          <h2 class="site-footer__title">کاربران</h2>
-          <ul>
-            <li><a href="listings.html">جستجوی کسب‌وکار</a></li>
-            <li><a href="index.html">خانه</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="site-footer__title">صاحبان کسب‌وکار</h2>
-          <ul>
-            <li><a href="dashboard.html">پنل و ویرایش آگهی</a></li>
-            <li><a href="advertise.html">بسته‌های تبلیغاتی</a></li>
-            <li><a href="advertise.html#inquiry">درخواست مشاوره</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="site-footer__bottom">
-        © ۲۰۲۶ ایرانیو — فهرست کسب‌وکارهای ایرانی در بریتانیا
-      </div>
-    </footer>
-    <nav class="app-dock" aria-label="ناوبری سریع">
-      <a href="index.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">🏠</span><span class="app-dock__lbl">خانه</span></a>
-      <a href="listings.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">📋</span><span class="app-dock__lbl">لیست</span></a>
-      <a href="advertise.html" class="app-dock__item app-dock__item--active" aria-current="page"><span class="app-dock__ico" aria-hidden="true">📣</span><span class="app-dock__lbl">آگهی</span></a>
-      <a href="dashboard.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">⚙️</span><span class="app-dock__lbl">پنل</span></a>
-    </nav>
+    <script>
+      window.IRANIU_CHAT = window.IRANIU_CHAT || { relayUrl: '' };
+    </script>
+    <script src="js/chat-widget.js" defer></script>
   </body>
 </html>

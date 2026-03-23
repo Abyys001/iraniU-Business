@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#3a0b47" />
-    <title>داشبورد سوپرادمین — ایرانیو</title>
+    <title>حساب‌های مدیر — سوپرادمین — ایرانیو</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -32,7 +32,7 @@
         <p class="app-shell__nav-title">سوپرادمین</p>
         <ul class="app-shell__nav">
           <li>
-            <a href="admin.html" aria-current="page">
+            <a href="admin.html">
               <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path
                   stroke="currentColor"
@@ -131,7 +131,7 @@
             </a>
           </li>
           <li>
-            <a href="admin-managers.html">
+            <a href="admin-managers.html" aria-current="page">
               <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path
                   stroke="currentColor"
@@ -178,8 +178,8 @@
             </svg>
           </label>
           <div class="app-shell__header-text">
-            <h1>داشبورد سوپرادمین</h1>
-            <p>خلاصهٔ وضعیت سیستم و آخرین رویدادها؛ مدیریت تفصیلی از منوی کناری.</p>
+            <h1>حساب‌های مدیر</h1>
+            <p>ثبت‌نام با Google و آگهی‌های لینک‌شده</p>
           </div>
           <div class="app-shell__search-wrap">
             <label class="visually-hidden" for="admin-global-search">جستجو در پنل</label>
@@ -214,115 +214,74 @@
 
         <div class="app-shell__scroll">
           <div class="admin-wrap">
-            <div class="app-shell__widgets">
-              <div class="app-shell__hero-card">
-                <p class="app-shell__hero-label">کل آگهی‌های سیستم</p>
-                <p class="app-shell__hero-value">۴</p>
-                <p class="app-shell__hero-meta">نمونهٔ رابط · فهرست کامل در «همه آگهی‌ها»</p>
-                <a class="app-shell__hero-btn" href="admin-add.html">افزودن آگهی جدید</a>
+            <p class="admin-back-link"><a href="admin.html">بازگشت به داشبورد</a></p>
+
+            <section class="admin-panel" id="admin-managers" aria-labelledby="mg-h">
+              <div class="admin-panel__head">
+                <h2 id="mg-h">حساب‌های مدیر (ثبت‌نام با Google)</h2>
+                <button
+                  type="button"
+                  class="btn btn--ghost admin-detail-trigger"
+                  data-detail-type="help"
+                  data-detail-title="راهنمای حساب مدیر"
+                  data-detail-id="help-managers"
+                  data-detail-status="راهنما"
+                  data-detail-lines="OAuth::ورود با Google در بک‌اند||لینک آگهی::پس از تأیید ادعا"
+                >
+                  راهنما (مودال)
+                </button>
               </div>
-              <div class="app-shell__metrics">
-                <div class="app-shell__metric app-shell__metric--teal">
-                  <p class="app-shell__metric-label">در انتظار ادعا</p>
-                  <p class="app-shell__metric-value">۲</p>
-                </div>
-                <div class="app-shell__metric app-shell__metric--purple">
-                  <p class="app-shell__metric-label">آگهی فعال</p>
-                  <p class="app-shell__metric-value">۳</p>
-                </div>
-                <div class="app-shell__metric app-shell__metric--blue">
-                  <p class="app-shell__metric-label">فاکتور این ماه</p>
-                  <p class="app-shell__metric-value">۲</p>
-                </div>
-                <div class="app-shell__metric app-shell__metric--coral">
-                  <p class="app-shell__metric-label">غیرفعال</p>
-                  <p class="app-shell__metric-value">۱</p>
-                </div>
-              </div>
-            </div>
-
-            <p class="dashboard-note admin-note--spaced">
-              این صفحه فقط نمای کلی است. جداول و فرم‌های عملیاتی در صفحات جداگانه باز می‌شوند؛ اتصال به API و
-              OAuth گوگل بعداً اضافه می‌شود.
-            </p>
-
-            <nav class="admin-dash-quick" aria-label="میانبر بخش‌های مدیریت">
-              <a class="admin-dash-quick__card" href="admin-businesses.html">
-                همه آگهی‌ها
-                <small>فهرست، وضعیت، یادداشت و مودال اقدام</small>
-              </a>
-              <a class="admin-dash-quick__card" href="admin-edit.html">
-                ویرایش آگهی
-                <small>فرم ویرایش برای همه کسب‌وکارها</small>
-              </a>
-              <a class="admin-dash-quick__card" href="admin-add.html">
-                افزودن آگهی
-                <small>ثبت آگهی بدون مالک</small>
-              </a>
-              <a class="admin-dash-quick__card" href="admin-claims.html">
-                درخواست‌های ادعا
-                <small>تأیید Google Business</small>
-              </a>
-              <a class="admin-dash-quick__card" href="admin-link.html">
-                لینک آگهی ↔ مدیر
-                <small>اتصال پس از تأیید ادعا</small>
-              </a>
-              <a class="admin-dash-quick__card" href="admin-billing.html">
-                صورت‌حساب
-                <small>فاکتورها و بسته‌ها</small>
-              </a>
-              <a class="admin-dash-quick__card" href="admin-managers.html">
-                حساب‌های مدیر
-                <small>ثبت‌نام با Google</small>
-              </a>
-              <a class="admin-dash-quick__card" href="admin-chat-log.html">
-                گفتگو و لاگ سایت
-                <small>پیام‌های ویجت، خروجی JSON، رلهٔ تلگرام</small>
-              </a>
-            </nav>
-
-            <section class="admin-panel admin-panel--dashboard-recent" aria-labelledby="dash-recent-h">
-              <h2 id="dash-recent-h">آخرین افزوده‌ها و رویدادها</h2>
-              <p class="field-hint">نمونهٔ داده برای نمای داشبورد؛ اتصال به API بعداً.</p>
               <div class="table-wrap">
                 <table class="data-table">
                   <thead>
                     <tr>
-                      <th>موضوع</th>
-                      <th>نوع</th>
-                      <th>تاریخ (نمونه)</th>
-                      <th>وضعیت</th>
-                      <th></th>
+                      <th>نام</th>
+                      <th>ایمیل</th>
+                      <th>تأیید ایمیل</th>
+                      <th>آگهی‌های لینک‌شده</th>
+                      <th>اقدام</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>رستوران سفره</td>
-                      <td>آگهی</td>
-                      <td>۱۴۰۳/۱۲/۱۰</td>
-                      <td><span class="status-pill status-pill--claimed">منتشر</span></td>
-                      <td><a class="btn btn--ghost" href="admin-businesses.html">مدیریت</a></td>
+                      <td>سارا کریمی</td>
+                      <td lang="en">sara.k@example.com</td>
+                      <td><span class="status-pill status-pill--claimed">تأیید</span></td>
+                      <td>کلینیک پارس</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn--primary admin-detail-trigger"
+                          data-detail-type="manager"
+                          data-detail-title="سارا کریمی"
+                          data-detail-id="mgr-sara-01"
+                          data-detail-status="تأیید شده"
+                          data-detail-email="sara.k@example.com"
+                          data-detail-lines="آگهی لینک‌شده::کلینیک پارس||نقش::مالک آگهی"
+                        >
+                          جزئیات و اقدام
+                        </button>
+                      </td>
                     </tr>
                     <tr>
-                      <td>ادعا — سوپرمارکت برکت</td>
-                      <td>ادعا</td>
-                      <td>۱۴۰۳/۱۲/۰۹</td>
-                      <td><span class="status-pill status-pill--pending">در انتظار</span></td>
-                      <td><a class="btn btn--ghost" href="admin-claims.html">بررسی</a></td>
-                    </tr>
-                    <tr>
-                      <td>فاکتور INV-2025-0143</td>
-                      <td>صورت‌حساب</td>
-                      <td>۱۴۰۳/۱۲/۰۸</td>
-                      <td><span class="status-pill status-pill--pending">در انتظار پرداخت</span></td>
-                      <td><a class="btn btn--ghost" href="admin-billing.html">جزئیات</a></td>
-                    </tr>
-                    <tr>
-                      <td>حساب علی محمدی</td>
-                      <td>مدیر</td>
-                      <td>۱۴۰۳/۱۲/۰۷</td>
-                      <td><span class="status-pill status-pill--pending">در انتظار لینک</span></td>
-                      <td><a class="btn btn--ghost" href="admin-managers.html">پروفایل</a></td>
+                      <td>علی محمدی</td>
+                      <td lang="en">ali.manager@example.com</td>
+                      <td><span class="status-pill status-pill--pending">در انتظار لینک آگهی</span></td>
+                      <td>—</td>
+                      <td>
+                        <button
+                          type="button"
+                          class="btn btn--primary admin-detail-trigger"
+                          data-detail-type="manager"
+                          data-detail-title="علی محمدی"
+                          data-detail-id="mgr-ali-02"
+                          data-detail-status="در انتظار لینک"
+                          data-detail-email="ali.manager@example.com"
+                          data-detail-lines="درخواست ادعا::رستوران سفره||اقدام بعدی::لینک در بخش مربوطه"
+                        >
+                          جزئیات و اقدام
+                        </button>
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -333,5 +292,57 @@
       </div>
     </main>
 
+    <div
+      id="admin-detail-modal"
+      class="admin-detail-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="adm-modal-title"
+      hidden
+      dir="rtl"
+      lang="fa"
+    >
+      <div class="admin-detail-modal__backdrop" data-admin-detail-dismiss tabindex="-1"></div>
+      <div class="admin-detail-modal__panel">
+        <button type="button" class="admin-detail-modal__close" aria-label="بستن پنجره">
+          <span aria-hidden="true">×</span>
+        </button>
+        <p class="admin-detail-modal__type" id="adm-modal-type"></p>
+        <h2 id="adm-modal-title" class="admin-detail-modal__title"></h2>
+        <div id="adm-modal-body" class="admin-detail-modal__body"></div>
+        <div class="admin-detail-modal__fields">
+          <div class="field field--block">
+            <label for="adm-modal-note">یادداشت ادمین (داخلی)</label>
+            <textarea id="adm-modal-note" rows="3" placeholder="برای ذخیرهٔ بعدی در بک‌اند…"></textarea>
+          </div>
+          <div class="field field--block" id="adm-modal-reject-wrap">
+            <label for="adm-modal-reject">دلیل رد / توقف</label>
+            <textarea
+              id="adm-modal-reject"
+              rows="2"
+              placeholder="برای رد آگهی، ادعا، فاکتور یا حساب الزامی است."
+            ></textarea>
+          </div>
+        </div>
+        <p id="adm-modal-toast" class="admin-detail-modal__toast" role="status" aria-live="polite" hidden></p>
+        <div class="admin-detail-modal__primary-actions">
+          <button type="button" class="btn btn--primary" data-admin-action="accept">پذیرش</button>
+          <button type="button" class="btn btn--danger" data-admin-action="reject">رد</button>
+        </div>
+        <div class="admin-detail-modal__tools">
+          <span class="admin-detail-modal__tools-label">ابزارهای تکمیلی</span>
+          <div class="admin-detail-modal__tools-row">
+            <button type="button" class="btn btn--ghost" data-admin-tool="note">ذخیرهٔ یادداشت</button>
+            <button type="button" class="btn btn--ghost" data-admin-tool="copy">کپی شناسه</button>
+            <button type="button" class="btn btn--ghost" data-admin-tool="profile" hidden>پروفایل عمومی</button>
+            <button type="button" class="btn btn--ghost" data-admin-tool="gbp" hidden>Google Business</button>
+            <button type="button" class="btn btn--ghost" data-admin-tool="email" hidden>ارسال ایمیل</button>
+            <button type="button" class="btn btn--ghost" data-admin-tool="suspend">تعلیق موقت</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/admin-detail-modal.js" defer></script>
   </body>
 </html>

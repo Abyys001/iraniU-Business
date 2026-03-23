@@ -13,7 +13,8 @@
     />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
-  <body class="has-app-dock business-page business-page--claimed">
+  <body class="business-page business-page--claimed">
+    <script src="js/require-mobile.js"></script>
     <a class="skip-link" href="#main">پرش به محتوا</a>
     <header class="site-header">
       <div class="site-header__inner">
@@ -53,29 +54,82 @@
           <a class="btn btn--primary" href="dashboard.html">ورود به پنل و ویرایش آگهی</a>
         </div>
         <div class="profile-panel">
-          <div
-            class="profile-cover"
-            style="background-image: url(https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&amp;q=80); background-size: cover; background-position: center"
-            aria-hidden="true"
-          ></div>
-          <div class="profile-head">
-            <div class="profile-logo" aria-hidden="true">پ</div>
-            <div class="profile-title-block">
-              <h1>کلینیک پارس</h1>
-              <p>پزشک عمومی و واکسن — <span lang="en-GB">Manchester</span></p>
-              <p>
-                <span class="badge badge--claimed-owner">مالک ثبت‌شده</span>
-                <span class="badge">ویژه</span>
-                · ۴٫۹ ⭐ · بیمه معتبر
-              </p>
+          <div class="profile-hero">
+            <div
+              class="profile-cover"
+              style="background-image: url(https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&amp;q=80); background-size: cover; background-position: center"
+              aria-hidden="true"
+            ></div>
+            <div class="profile-head">
+              <div class="profile-logo" aria-hidden="true">پ</div>
+              <div class="profile-title-block">
+                <h1>کلینیک پارس</h1>
+                <p>پزشک عمومی و واکسن — <span lang="en-GB">Manchester</span></p>
+                <p>
+                  <span class="badge badge--claimed-owner">مالک ثبت‌شده</span>
+                  <span class="badge">ویژه</span>
+                  · ۴٫۹ ⭐ · بیمه معتبر
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="layout-split">
           <div>
-            <section class="profile-panel profile-body" aria-labelledby="about-title">
-              <h2 id="about-title">درباره کسب‌وکار</h2>
+            <svg xmlns="http://www.w3.org/2000/svg" class="contact-sprite" aria-hidden="true" focusable="false">
+              <defs>
+                <symbol id="section-about" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm4 18H6V4h7v5h5v11zm-2-7H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"
+                  />
+                </symbol>
+                <symbol id="section-gallery" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"
+                  />
+                </symbol>
+                <symbol id="section-map" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
+                  />
+                </symbol>
+                <symbol id="section-promote" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"
+                  />
+                </symbol>
+              </defs>
+            </svg>
+            <section
+              class="profile-panel profile-body profile-promo"
+              id="biz-promo-section"
+              aria-labelledby="promo-section-title"
+            >
+              <h2 id="promo-section-title" class="profile-section-heading">
+                <span class="profile-section-heading__icon" aria-hidden="true"
+                  ><svg class="profile-section-heading__svg" aria-hidden="true"><use href="#section-promote" /></svg
+                ></span>
+                پیشنهاد و تبلیغ
+              </h2>
+              <h3 class="profile-promo__title" id="biz-promo-title">ویزیت اول رایگان برای کودکان زیر ۵ سال</h3>
+              <p class="profile-promo__desc" id="biz-promo-desc">
+                تا پایان فصل، اولین ویزیت عمومی برای هر کودک زیر پنج سال در کلینیک پارس رایگان است؛ شامل معاینهٔ
+                کوتاه و راهنمایی والدین. نوبت را از طریق وب‌سایت یا تماس ثبت کنید. شرایط کامل و محدودیت‌ها در
+                پنل مدیریت قابل ویرایش است.
+              </p>
+            </section>
+            <section class="profile-panel profile-body profile-about" aria-labelledby="about-title">
+              <h2 id="about-title" class="profile-section-heading">
+                <span class="profile-section-heading__icon" aria-hidden="true"
+                  ><svg class="profile-section-heading__svg" aria-hidden="true"><use href="#section-about" /></svg
+                ></span>
+                درباره کسب‌وکار
+              </h2>
               <p>
                 نوبت آنلاین و حضوری، خدمات خانواده و واکسیناسیون. این صفحه نمونهٔ «ادعا شده» است؛ بنر ادعا
                 اینجا دیده نمی‌شود.
@@ -83,7 +137,12 @@
             </section>
 
             <section class="profile-panel profile-body" aria-labelledby="gallery-title">
-              <h2 id="gallery-title">گالری</h2>
+              <h2 id="gallery-title" class="profile-section-heading">
+                <span class="profile-section-heading__icon" aria-hidden="true"
+                  ><svg class="profile-section-heading__svg" aria-hidden="true"><use href="#section-gallery" /></svg
+                ></span>
+                گالری
+              </h2>
               <div class="gallery" role="list">
                 <div class="gallery__item" role="listitem"></div>
                 <div class="gallery__item" role="listitem"></div>
@@ -92,25 +151,220 @@
             </section>
 
             <section class="profile-panel profile-body" aria-labelledby="map-title">
-              <h2 id="map-title">موقعیت روی نقشه</h2>
-              <a class="btn btn--primary btn--block" href="https://maps.google.com" target="_blank" rel="noopener noreferrer">مسیریابی در Google Maps</a>
+              <h2 id="map-title" class="profile-section-heading">
+                <span class="profile-section-heading__icon" aria-hidden="true"
+                  ><svg class="profile-section-heading__svg" aria-hidden="true"><use href="#section-map" /></svg
+                ></span>
+                موقعیت روی نقشه
+              </h2>
+              <p class="profile-map__address" id="biz-map-address">
+                <span class="profile-map__address-label">آدرس</span>
+                ۴۵ نمونه رد، منچستر، <span lang="en-GB">M1 2AB</span>
+              </p>
+              <div id="biz-map-box">
+                <a class="btn btn--primary btn--block" href="https://maps.google.com" target="_blank" rel="noopener noreferrer">مسیریابی در Google Maps</a>
+              </div>
             </section>
           </div>
 
           <aside aria-label="تماس و تبلیغات">
+            <svg xmlns="http://www.w3.org/2000/svg" class="contact-sprite" aria-hidden="true" focusable="false">
+              <defs>
+                <symbol id="contact-phone" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"
+                  />
+                </symbol>
+                <symbol id="contact-mobile" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M15.5 1h-8C6.12 1 5 2.12 5 3.5v17C5 21.88 6.12 23 7.5 23h8c1.38 0 2.5-1.12 2.5-2.5v-17C18 2.12 16.88 1 15.5 1zm-4 21c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4.5-4H7V4h9v14z"
+                  />
+                </symbol>
+                <symbol id="contact-globe" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93h2c0 2.76 2.24 5 5 5v2zm6.9-3h-2.08c-.41 2.63-1.41 4.93-2.82 6.56A9.97 9.97 0 0 0 17.93 17zM12 6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm5.9 8h2a9.87 9.87 0 0 1-3.55 5.56c1.41-1.63 2.41-3.93 2.82-6.56z"
+                  />
+                </symbol>
+                <symbol id="contact-mail" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+                  />
+                </symbol>
+                <symbol id="contact-instagram" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85c.15-3.23 1.66-4.77 4.92-4.92 1.27-.06 1.64-.07 4.85-.07zM12 7.4a4.6 4.6 0 1 0 0 9.2 4.6 4.6 0 0 0 0-9.2zm0 7.6a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm5.2-8.4a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0z"
+                  />
+                </symbol>
+                <symbol id="contact-telegram" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69l-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.74-.55 2.92-1.27 4.86-2.11 5.83-2.51 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27z"
+                  />
+                </symbol>
+                <symbol id="contact-whatsapp" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51-.17 0-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.08-.13-.27-.2-.57-.35M12.05 21.89h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.44 9.88-9.89 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45h.01c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 0 0-3.48-8.41z"
+                  />
+                </symbol>
+                <symbol id="contact-facebook" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M24 12.073C24 5.446 18.627.073 12 .073S0 5.446 0 12.073C0 18.615 5.051 24.015 11.675 24.965v-8.38H8.078v-3.47h3.597V9.413c0-3.55 2.116-5.516 5.344-5.516 1.55 0 3.174.276 3.174.276v3.497h-1.788c-1.764 0-2.314 1.095-2.314 2.222v2.676h3.937l-.63 3.51h-3.307v8.384C18.949 24.015 24 18.615 24 12.073z"
+                  />
+                </symbol>
+                <symbol id="contact-twitter" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"
+                  />
+                </symbol>
+                <symbol id="contact-linkedin" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69A1.69 1.69 0 0 0 5.19 6.88c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"
+                  />
+                </symbol>
+                <symbol id="contact-calendar" viewBox="0 0 24 24">
+                  <path
+                    fill="currentColor"
+                    d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V10h14v10zM7 12h2v2H7zm4 0h2v2h-2zm4 0h2v2h-2z"
+                  />
+                </symbol>
+              </defs>
+            </svg>
             <section class="profile-panel profile-body">
-              <h2>تماس</h2>
-              <ul class="contact-list">
-                <li><strong>تلفن:</strong> <a href="tel:+441612345678">۰۱۶۱ ۱۲۳ ۴۵۶۷</a></li>
-                <li><strong>وب‌سایت:</strong> <a href="#" lang="en">parsclinic.example.uk</a></li>
+              <h2 class="contact-panel__title">
+                <span class="contact-list__icon-wrap" aria-hidden="true"
+                  ><svg class="contact-list__svg" aria-hidden="true"><use href="#contact-phone" /></svg
+                ></span>
+                تماس
+              </h2>
+              <ul class="contact-list" id="biz-contact">
+                <li class="contact-list__item">
+                  <span class="contact-list__icon-wrap" aria-hidden="true"
+                    ><svg class="contact-list__svg" aria-hidden="true"><use href="#contact-phone" /></svg
+                  ></span>
+                  <div class="contact-list__main">
+                    <a href="tel:+441612345678" class="phone-ltr" dir="ltr">۰۱۶۱ ۱۲۳ ۴۵۶۷</a>
+                  </div>
+                </li>
+                <li class="contact-list__item">
+                  <span class="contact-list__icon-wrap" aria-hidden="true"
+                    ><svg class="contact-list__svg" aria-hidden="true"><use href="#contact-mobile" /></svg
+                  ></span>
+                  <div class="contact-list__main">
+                    <a href="tel:+447900333444" class="phone-ltr" dir="ltr">۰۷۹۰۰ ۳۳۳۴۴۴</a>
+                  </div>
+                </li>
+                <li class="contact-list__item">
+                  <span class="contact-list__icon-wrap" aria-hidden="true"
+                    ><svg class="contact-list__svg" aria-hidden="true"><use href="#contact-mail" /></svg
+                  ></span>
+                  <div class="contact-list__main">
+                    <a href="mailto:reception@parsclinic.example.uk" lang="en">reception@parsclinic.example.uk</a>
+                  </div>
+                </li>
+                <li class="contact-list__item contact-list__item--icon-row">
+                  <div class="contact-list__icon-row-inner" role="group" aria-label="وب‌سایت و شبکه‌های اجتماعی">
+                    <a
+                      class="contact-list__icon-link"
+                      href="https://parsclinic.example.uk"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      lang="en"
+                      aria-label="وب‌سایت"
+                      ><span class="contact-list__icon-wrap" aria-hidden="true"
+                        ><svg class="contact-list__svg" aria-hidden="true"><use href="#contact-globe" /></svg></span
+                    ></a>
+                    <a
+                      class="contact-list__icon-link"
+                      href="https://instagram.com/parsclinic_demo"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      lang="en"
+                      aria-label="اینستاگرام"
+                      ><span class="contact-list__icon-wrap" aria-hidden="true"
+                        ><svg class="contact-list__svg" aria-hidden="true"><use href="#contact-instagram" /></svg></span
+                    ></a>
+                    <a
+                      class="contact-list__icon-link"
+                      href="https://t.me/parsclinic_demo"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      lang="en"
+                      aria-label="تلگرام"
+                      ><span class="contact-list__icon-wrap" aria-hidden="true"
+                        ><svg class="contact-list__svg" aria-hidden="true"><use href="#contact-telegram" /></svg></span
+                    ></a>
+                    <a
+                      class="contact-list__icon-link"
+                      href="https://wa.me/441612345678"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="واتساپ — گفتگو"
+                      ><span class="contact-list__icon-wrap" aria-hidden="true"
+                        ><svg class="contact-list__svg" aria-hidden="true"><use href="#contact-whatsapp" /></svg></span
+                    ></a>
+                    <a
+                      class="contact-list__icon-link"
+                      href="https://facebook.com/parsclinic.demo"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      lang="en"
+                      aria-label="فیس‌بوک"
+                      ><span class="contact-list__icon-wrap" aria-hidden="true"
+                        ><svg class="contact-list__svg" aria-hidden="true"><use href="#contact-facebook" /></svg></span
+                    ></a>
+                    <a
+                      class="contact-list__icon-link"
+                      href="https://x.com/parsclinic_demo"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      lang="en"
+                      aria-label="توییتر / X"
+                      ><span class="contact-list__icon-wrap" aria-hidden="true"
+                        ><svg class="contact-list__svg" aria-hidden="true"><use href="#contact-twitter" /></svg></span
+                    ></a>
+                    <a
+                      class="contact-list__icon-link"
+                      href="https://linkedin.com/company/parsclinic-demo"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      lang="en"
+                      aria-label="لینکدین"
+                      ><span class="contact-list__icon-wrap" aria-hidden="true"
+                        ><svg class="contact-list__svg" aria-hidden="true"><use href="#contact-linkedin" /></svg></span
+                    ></a>
+                    <a
+                      class="contact-list__icon-link"
+                      href="https://cal.com/parsclinic-demo"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      lang="en"
+                      aria-label="رزرو نوبت آنلاین"
+                      ><span class="contact-list__icon-wrap" aria-hidden="true"
+                        ><svg class="contact-list__svg" aria-hidden="true"><use href="#contact-calendar" /></svg></span
+                    ></a>
+                  </div>
+                </li>
               </ul>
-              <a class="btn btn--primary btn--block" href="tel:+441612345678">تماس بگیرید</a>
             </section>
             <div class="ad-slot ad-slot--sidebar" role="complementary" aria-label="جای تبلیغ">
               تبلیغ کنار پروفایل — ۳۰۰×۲۵۰ یا ستون ثابت
             </div>
             <section class="profile-panel profile-body">
-              <h2>ارتقای آگهی</h2>
+              <h2 class="profile-section-heading">
+                <span class="profile-section-heading__icon" aria-hidden="true"
+                  ><svg class="profile-section-heading__svg" aria-hidden="true"><use href="#section-promote" /></svg
+                ></span>
+                ارتقای آگهی
+              </h2>
               <p>بسته تبلیغاتی و صورتحساب را از پنل مدیریت یا صفحه بسته‌ها ببینید.</p>
               <a class="btn btn--accent btn--block" href="advertise.html">بسته‌ها و پرداخت</a>
             </section>
@@ -119,37 +373,9 @@
       </article>
     </main>
 
-    <footer class="site-footer">
-      <div class="site-footer__grid">
-        <div>
-          <h2 class="site-footer__title">ایرانیو</h2>
-          <p>فهرست کسب‌وکارهای فارسی‌زبان در بریتانیا؛ برای کاربران و صاحبان کسب‌وکار.</p>
-        </div>
-        <div>
-          <h2 class="site-footer__title">کاربران</h2>
-          <ul>
-            <li><a href="listings.html">جستجوی کسب‌وکار</a></li>
-            <li><a href="index.html">خانه</a></li>
-          </ul>
-        </div>
-        <div>
-          <h2 class="site-footer__title">صاحبان کسب‌وکار</h2>
-          <ul>
-            <li><a href="dashboard.html">پنل و ویرایش آگهی</a></li>
-            <li><a href="advertise.html">بسته‌های تبلیغاتی</a></li>
-            <li><a href="advertise.html#inquiry">درخواست مشاوره</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="site-footer__bottom">
-        © ۲۰۲۶ ایرانیو — فهرست کسب‌وکارهای ایرانی در بریتانیا
-      </div>
-    </footer>
-    <nav class="app-dock" aria-label="ناوبری سریع">
-      <a href="index.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">🏠</span><span class="app-dock__lbl">خانه</span></a>
-      <a href="listings.html" class="app-dock__item app-dock__item--active" aria-current="page"><span class="app-dock__ico" aria-hidden="true">📋</span><span class="app-dock__lbl">لیست</span></a>
-      <a href="advertise.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">📣</span><span class="app-dock__lbl">آگهی</span></a>
-      <a href="dashboard.html" class="app-dock__item"><span class="app-dock__ico" aria-hidden="true">⚙️</span><span class="app-dock__lbl">پنل</span></a>
-    </nav>
+    <script>
+      window.IRANIU_CHAT = window.IRANIU_CHAT || { relayUrl: '' };
+    </script>
+    <script src="js/chat-widget.js" defer></script>
   </body>
 </html>

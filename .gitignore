@@ -1,3 +1,8 @@
-# پروتوتایپ استاتیک — در صورت افزودن بک‌اند، اینجا را تکمیل کنید.
 .DS_Store
-server/data/*.jsonl
+node_modules/
+client/node_modules/
+server/node_modules/
+client/dist/
+server/data/*.db
+server/data/*.db-*
+server/.env

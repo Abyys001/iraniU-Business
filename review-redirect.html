@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>در حال انتقال به Google…</title>
+    <style>
+      body {
+        font-family: Tahoma, "Segoe UI", sans-serif;
+        text-align: center;
+        padding: 2rem;
+        color: #1a1f24;
+        background: #f6f4f8;
+      }
+    </style>
+  </head>
+  <body>
+    <p>در حال انتقال به صفحهٔ نظرات…</p>
+    <script>
+      (function () {
+        var NS = "iraniu-qr";
+
+        function base64UrlToString(s) {
+          if (!s) return null;
+          try {
+            var pad = s.length % 4;
+            if (pad) s += new Array(5 - pad).join("=");
+            s = s.replace(/-/g, "+").replace(/_/g, "/");
+            var bin = atob(s);
+            try {
+              return decodeURIComponent(
+                Array.prototype.map
+                  .call(bin, function (c) {
+                    return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+                  })
+                  .join("")
+              );
+            } catch (e2) {
+              return bin;
+            }
+          } catch (e) {
+            return null;
+          }
+        }
+
+        function safeGoogleReviewUrl(url) {
+          if (!url || typeof url !== "string") return null;
+          var u;
+          try {
+            u = new URL(url.trim());
+          } catch (e) {
+            return null;
+          }
+          if (u.protocol !== "https:" && u.protocol !== "http:") return null;
+          var host = u.hostname.toLowerCase();
+          var ok =
+            host.indexOf("google.") !== -1 ||
+            host === "g.page" ||
+            host === "goo.gl" ||
+            host === "maps.app.goo.gl" ||
+            host.slice(-6) === ".g.page";
+          if (!ok) return null;
+          if (u.protocol === "http:") u.protocol = "https:";
+          return u.href;
+        }
+
+        function sanitizeBid(raw) {
+          var s = String(raw || "")
+            .trim()
+            .toLowerCase()
+            .replace(/[^a-z0-9_-]/g, "-")
+            .replace(/-+/g, "-")
+            .replace(/^-|-$/g, "");
+          return s || "business";
+        }
+
+        function counterKey(bid) {
+          return "qr_" + sanitizeBid(bid).slice(0, 80);
+        }
+
+        function bumpCounter(bid) {
+          var key = counterKey(bid);
+          return fetch("https://api.countapi.xyz/hit/" + NS + "/" + key)
+            .then(function (r) {
+              return r.json();
+            })
+            .catch(function () {
+              return null;
+            });
+        }
+
+        var params = new URLSearchParams(window.location.search);
+        var t = params.get("t");
+        var bid = sanitizeBid(params.get("bid"));
+        var target = safeGoogleReviewUrl(base64UrlToString(t));
+
+        function fail(msg) {
+          document.body.innerHTML =
+            "<p style=\"max-width:24rem;margin:2rem auto;\">" + (msg || "لینک نامعتبر یا منقضی است.") + "</p>";
+        }
+
+        if (!target) {
+          fail("لینک نظر Google معتبر نیست. لینک باید از نوع maps.google، g.page یا goo.gl باشد.");
+          return;
+        }
+
+        bumpCounter(bid).finally(function () {
+          window.location.replace(target);
+        });
+      })();
+    </script>
+  </body>
+</html>

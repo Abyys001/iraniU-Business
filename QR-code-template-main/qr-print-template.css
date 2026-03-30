@@ -1,0 +1,470 @@
+/**
+ * QR print flyer — قالب چاپ نظر Google
+ * تم‌ها با عدد data-qr-theme="1" … "20" انتخاب می‌شوند.
+ */
+
+/* یکان بخ — متن فارسی در PDF/html2canvas (فایل‌ها در public/fonts) */
+@font-face {
+  font-family: "Yekan Bakh";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    local("Yekan Bakh"),
+    local("YekanBakh-Regular"),
+    url("/fonts/YekanBakh-Regular.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Yekan Bakh";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src:
+    local("Yekan Bakh Bold"),
+    local("YekanBakh-Bold"),
+    url("/fonts/YekanBakh-Bold.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Yekan Bakh";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src:
+    local("Yekan Bakh ExtraBlack"),
+    local("YekanBakh-ExtraBlack"),
+    url("/fonts/YekanBakh-ExtraBlack.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "Yekan Bakh";
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src:
+    local("Yekan Bakh ExtraBlack"),
+    local("YekanBakh-ExtraBlack"),
+    url("/fonts/YekanBakh-ExtraBlack.otf") format("opentype");
+}
+
+.qr-tpl {
+  --tpl-accent: #3a0b47;
+  --tpl-accent-mid: #5c1f6e;
+  --tpl-accent-soft: #f5eef8;
+  --tpl-surface: #ffffff;
+  --tpl-text: #1a1f24;
+  --tpl-muted: #5c6670;
+  --tpl-border: rgba(58, 11, 71, 0.15);
+  --tpl-ribbon: linear-gradient(135deg, #3a0b47 0%, #5c1f6e 55%, #7b3d8f 100%);
+  font-family: "Yekan Bakh", Tahoma, "Segoe UI", sans-serif;
+  direction: rtl;
+  text-align: center;
+  color: var(--tpl-text);
+  box-sizing: border-box;
+}
+
+.qr-tpl *,
+.qr-tpl *::before,
+.qr-tpl *::after {
+  box-sizing: border-box;
+}
+
+/* تم ۱ — برند بنفش ایرانیو */
+.qr-tpl[data-qr-theme="1"] {
+  --tpl-accent: #3a0b47;
+  --tpl-accent-mid: #5c1f6e;
+  --tpl-accent-soft: #faf5fc;
+  --tpl-ribbon: linear-gradient(135deg, #2d082f 0%, #3a0b47 45%, #5c1f6e 100%);
+  --tpl-border: rgba(58, 11, 71, 0.2);
+}
+
+/* تم ۲ — فیروزه‌ای */
+.qr-tpl[data-qr-theme="2"] {
+  --tpl-accent: #0d5c63;
+  --tpl-accent-mid: #128c96;
+  --tpl-accent-soft: #e8f6f7;
+  --tpl-ribbon: linear-gradient(135deg, #094950 0%, #0d5c63 50%, #1a9aa8 100%);
+  --tpl-border: rgba(13, 92, 99, 0.25);
+}
+
+/* تم ۳ — طلایی / کهربایی */
+.qr-tpl[data-qr-theme="3"] {
+  --tpl-accent: #6b4a0a;
+  --tpl-accent-mid: #c9a227;
+  --tpl-accent-soft: #fbf6e8;
+  --tpl-ribbon: linear-gradient(135deg, #4a3206 0%, #8b6914 40%, #c9a227 100%);
+  --tpl-muted: #5c4a28;
+  --tpl-border: rgba(201, 162, 39, 0.35);
+}
+
+/* تم ۴ — سرمه‌ای */
+.qr-tpl[data-qr-theme="4"] {
+  --tpl-accent: #1e3a5f;
+  --tpl-accent-mid: #2d5a8f;
+  --tpl-accent-soft: #eef3f9;
+  --tpl-ribbon: linear-gradient(135deg, #152a45 0%, #1e3a5f 50%, #3d6dad 100%);
+  --tpl-border: rgba(30, 58, 95, 0.22);
+}
+
+/* تم ۵ — گل‌سرخی */
+.qr-tpl[data-qr-theme="5"] {
+  --tpl-accent: #7a1f3a;
+  --tpl-accent-mid: #b83d5e;
+  --tpl-accent-soft: #fceef2;
+  --tpl-ribbon: linear-gradient(135deg, #5c1528 0%, #7a1f3a 45%, #c75b78 100%);
+  --tpl-border: rgba(122, 31, 58, 0.22);
+}
+
+/* تم ۶ — سبز جنگلی */
+.qr-tpl[data-qr-theme="6"] {
+  --tpl-accent: #14532d;
+  --tpl-accent-mid: #166534;
+  --tpl-accent-soft: #ecfdf5;
+  --tpl-ribbon: linear-gradient(135deg, #14532d 0%, #166534 45%, #22c55e 100%);
+  --tpl-border: rgba(20, 83, 45, 0.25);
+}
+
+/* تم ۷ — نارنجی */
+.qr-tpl[data-qr-theme="7"] {
+  --tpl-accent: #9a3412;
+  --tpl-accent-mid: #ea580c;
+  --tpl-accent-soft: #fff7ed;
+  --tpl-ribbon: linear-gradient(135deg, #7c2d12 0%, #c2410c 50%, #ea580c 100%);
+  --tpl-border: rgba(234, 88, 12, 0.3);
+}
+
+/* تم ۸ — ایندیگو */
+.qr-tpl[data-qr-theme="8"] {
+  --tpl-accent: #3730a3;
+  --tpl-accent-mid: #4f46e5;
+  --tpl-accent-soft: #eef2ff;
+  --tpl-ribbon: linear-gradient(135deg, #312e81 0%, #4338ca 50%, #6366f1 100%);
+  --tpl-border: rgba(79, 70, 229, 0.25);
+}
+
+/* تم ۹ — خاکستری تیره */
+.qr-tpl[data-qr-theme="9"] {
+  --tpl-accent: #334155;
+  --tpl-accent-mid: #64748b;
+  --tpl-accent-soft: #f1f5f9;
+  --tpl-ribbon: linear-gradient(135deg, #1e293b 0%, #334155 50%, #64748b 100%);
+  --tpl-muted: #475569;
+  --tpl-border: rgba(51, 65, 85, 0.2);
+}
+
+/* تم ۱۰ — سرخابی */
+.qr-tpl[data-qr-theme="10"] {
+  --tpl-accent: #9d174d;
+  --tpl-accent-mid: #db2777;
+  --tpl-accent-soft: #fdf2f8;
+  --tpl-ribbon: linear-gradient(135deg, #831843 0%, #be185d 50%, #ec4899 100%);
+  --tpl-border: rgba(219, 39, 119, 0.22);
+}
+
+/* تم ۱۱ — سبز زیتونی */
+.qr-tpl[data-qr-theme="11"] {
+  --tpl-accent: #3f6212;
+  --tpl-accent-mid: #65a30d;
+  --tpl-accent-soft: #f7fee7;
+  --tpl-ribbon: linear-gradient(135deg, #365314 0%, #4d7c0f 50%, #84cc16 100%);
+  --tpl-muted: #4d5c26;
+  --tpl-border: rgba(101, 163, 13, 0.35);
+}
+
+/* تم ۱۲ — آبی آسمانی */
+.qr-tpl[data-qr-theme="12"] {
+  --tpl-accent: #0369a1;
+  --tpl-accent-mid: #0284c7;
+  --tpl-accent-soft: #e0f2fe;
+  --tpl-ribbon: linear-gradient(135deg, #075985 0%, #0369a1 50%, #0ea5e9 100%);
+  --tpl-border: rgba(3, 105, 161, 0.25);
+}
+
+/* تم ۱۳ — زرشکی */
+.qr-tpl[data-qr-theme="13"] {
+  --tpl-accent: #7f1d1d;
+  --tpl-accent-mid: #b91c1c;
+  --tpl-accent-soft: #fef2f2;
+  --tpl-ribbon: linear-gradient(135deg, #450a0a 0%, #991b1b 50%, #dc2626 100%);
+  --tpl-border: rgba(127, 29, 29, 0.25);
+}
+
+/* تم ۱۴ — بنفش روشن */
+.qr-tpl[data-qr-theme="14"] {
+  --tpl-accent: #6d28d9;
+  --tpl-accent-mid: #8b5cf6;
+  --tpl-accent-soft: #f5f3ff;
+  --tpl-ribbon: linear-gradient(135deg, #5b21b6 0%, #7c3aed 50%, #a78bfa 100%);
+  --tpl-border: rgba(109, 40, 217, 0.22);
+}
+
+/* تم ۱۵ — کهربایی */
+.qr-tpl[data-qr-theme="15"] {
+  --tpl-accent: #b45309;
+  --tpl-accent-mid: #d97706;
+  --tpl-accent-soft: #fffbeb;
+  --tpl-ribbon: linear-gradient(135deg, #92400e 0%, #d97706 50%, #fbbf24 100%);
+  --tpl-muted: #78350f;
+  --tpl-border: rgba(217, 119, 6, 0.35);
+}
+
+/* تم ۱۶ — فیروزه‌ای نعنایی */
+.qr-tpl[data-qr-theme="16"] {
+  --tpl-accent: #0f766e;
+  --tpl-accent-mid: #14b8a6;
+  --tpl-accent-soft: #ccfbf1;
+  --tpl-ribbon: linear-gradient(135deg, #134e4a 0%, #0d9488 50%, #2dd4bf 100%);
+  --tpl-border: rgba(15, 118, 110, 0.25);
+}
+
+/* تم ۱۷ — آلوئی */
+.qr-tpl[data-qr-theme="17"] {
+  --tpl-accent: #6b21a8;
+  --tpl-accent-mid: #a855f7;
+  --tpl-accent-soft: #faf5ff;
+  --tpl-ribbon: linear-gradient(135deg, #581c87 0%, #9333ea 50%, #c084fc 100%);
+  --tpl-border: rgba(107, 33, 168, 0.22);
+}
+
+/* تم ۱۸ — آبی جین */
+.qr-tpl[data-qr-theme="18"] {
+  --tpl-accent: #1e40af;
+  --tpl-accent-mid: #3b82f6;
+  --tpl-accent-soft: #eff6ff;
+  --tpl-ribbon: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #60a5fa 100%);
+  --tpl-border: rgba(30, 64, 175, 0.22);
+}
+
+/* تم ۱۹ — مرجانی */
+.qr-tpl[data-qr-theme="19"] {
+  --tpl-accent: #be123c;
+  --tpl-accent-mid: #f43f5e;
+  --tpl-accent-soft: #fff1f2;
+  --tpl-ribbon: linear-gradient(135deg, #9f1239 0%, #e11d48 50%, #fb7185 100%);
+  --tpl-border: rgba(190, 18, 60, 0.22);
+}
+
+/* تم ۲۰ — فیروزه‌ای نیمه‌شب */
+.qr-tpl[data-qr-theme="20"] {
+  --tpl-accent: #164e63;
+  --tpl-accent-mid: #0891b2;
+  --tpl-accent-soft: #ecfeff;
+  --tpl-ribbon: linear-gradient(135deg, #155e75 0%, #0891b2 50%, #22d3ee 100%);
+  --tpl-border: rgba(8, 145, 178, 0.25);
+}
+
+.qr-tpl__sheet {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.qr-tpl__frame {
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.04),
+    0 18px 40px rgba(26, 31, 36, 0.12);
+  border: 1px solid var(--tpl-border);
+  background: var(--tpl-surface);
+}
+
+.qr-tpl__ribbon {
+  position: relative;
+  z-index: 0;
+  background: var(--tpl-ribbon);
+  color: #fff;
+  padding: 0.85rem 1.25rem 1rem;
+  overflow: hidden;
+}
+
+/* English ribbon copy — PDF/html2canvas renders Latin reliably */
+.qr-tpl__ribbon[dir="ltr"] {
+  direction: ltr;
+  text-align: center;
+  unicode-bidi: isolate;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.qr-tpl__ribbon-title,
+.qr-tpl__ribbon-sub {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.qr-tpl__ribbon::after {
+  content: "";
+  position: absolute;
+  inset-inline: 12%;
+  bottom: 0;
+  height: 4px;
+  border-radius: 4px 4px 0 0;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.qr-tpl__ribbon-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
+.qr-tpl__ribbon-sub {
+  margin: 0.35rem 0 0;
+  font-size: 0.82rem;
+  opacity: 0.92;
+  font-weight: 500;
+}
+
+.qr-tpl__body {
+  position: relative;
+  z-index: 1;
+  padding: 1.35rem 1.5rem 1.5rem;
+  background: linear-gradient(180deg, var(--tpl-accent-soft) 0%, var(--tpl-surface) 42%);
+  font-family: "Yekan Bakh", Tahoma, "Segoe UI", sans-serif;
+}
+
+.qr-tpl__logo {
+  margin: 0 auto 1rem;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-tpl__logo img {
+  max-height: 76px;
+  width: auto;
+  max-width: 240px;
+  object-fit: contain;
+}
+
+.qr-tpl__logo--empty {
+  display: none;
+}
+
+.qr-tpl__qr {
+  position: relative;
+  z-index: 3;
+  isolation: isolate;
+  display: inline-block;
+  padding: 0.65rem;
+  background: #fff;
+  border-radius: 16px;
+  border: 2px solid var(--tpl-border);
+  box-shadow: 0 8px 24px rgba(26, 31, 36, 0.08);
+  margin-bottom: 1rem;
+}
+
+.qr-tpl__qr img {
+  display: block;
+  width: 220px;
+  height: 220px;
+  border-radius: 10px;
+}
+
+.qr-tpl__qr canvas.qr-tpl__qr-canvas {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 220px;
+  height: 220px;
+  border-radius: 10px;
+  vertical-align: top;
+  background: #fff;
+  mix-blend-mode: normal;
+}
+
+.qr-tpl__headline {
+  position: relative;
+  z-index: 0;
+  margin: 0 0 0.4rem;
+  font-family: "Yekan Bakh", Tahoma, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--tpl-accent);
+  line-height: 1.35;
+}
+
+.qr-tpl__hint {
+  margin: 0 0 0.75rem;
+  font-family: "Yekan Bakh", Tahoma, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--tpl-muted);
+}
+
+.qr-tpl__biz {
+  margin: 0;
+  font-family: "Yekan Bakh", Tahoma, sans-serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--tpl-accent-mid);
+}
+
+.qr-tpl__strip {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.65rem 1rem 0.75rem;
+  background: var(--tpl-accent);
+  color: #fff;
+  text-align: center;
+  unicode-bidi: isolate;
+}
+
+.qr-tpl__strip-url {
+  direction: ltr;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.qr-tpl__strip-slogan {
+  direction: rtl;
+  font-family: "Yekan Bakh", Tahoma, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 100%;
+  padding: 0 0.25rem;
+}
+
+.qr-tpl__deco {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.qr-tpl__ribbon .qr-tpl__deco--tl {
+  top: -14px;
+  inset-inline-start: -10px;
+}
+
+.qr-tpl__ribbon .qr-tpl__deco--br {
+  bottom: -18px;
+  inset-inline-end: -10px;
+}
+
+@media print {
+  .qr-tpl__sheet {
+    max-width: none;
+  }
+
+  .qr-tpl__frame {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+}

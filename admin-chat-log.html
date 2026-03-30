@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#3a0b47" />
     <title>گفتگو و لاگ سایت — سوپرادمین — ایرانیو</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body class="app-shell-body">
@@ -211,26 +205,9 @@
                 <h2 id="chatlog-h">لاگ پیام‌های ویجت پشتیبانی</h2>
               </div>
               <p class="field-hint">
-                پیام‌های ارسالی از ویجت 💬 در سایت عمومی در <strong>همین مرورگر</strong> داخل localStorage ذخیره
-                می‌شوند تا بتوانید برای دمو آموزش/مانیتورینگ ببینید. برای پروداکشن، سرور رله را اجرا کنید: هر پیام
-                علاوه بر فایل JSONL روی سرور، به تلگرام شما هم فرستاده می‌شود (توکن ربات فقط در سرور).
+                ویجت گفتگو از صفحات عمومی حذف شده است. در اپ React، لاگ سرور از <strong>سوپرادمین → گفتگو و لاگ سایت</strong>
+                قابل مشاهده است. این صفحهٔ قدیمی فقط دادهٔ احتمالی <code dir="ltr">localStorage</code> را نشان می‌دهد.
               </p>
-              <ol class="admin-chat-log__steps">
-                <li>
-                  در BotFather تلگرام بسازید؛ <code dir="ltr">TELEGRAM_BOT_TOKEN</code> و
-                  <code dir="ltr">TELEGRAM_ADMIN_CHAT_ID</code> (چت‌آیدی خودتان با ربات) را تنظیم کنید.
-                </li>
-                <li>
-                  اجرا:
-                  <code dir="ltr">node server/telegram-relay.mjs</code>
-                </li>
-                <li>
-                  در صفحات عمومی قبل از <code dir="ltr">chat-widget.js</code> بگذارید:
-                  <code dir="ltr">window.IRANIU_CHAT = { relayUrl: 'http://localhost:3847/relay' };</code>
-                  (در HTTPS، رله را هم روی HTTPS پشت دامنهٔ خودتان بگذارید.)
-                </li>
-                <li>فایل لاگ سرور: <code dir="ltr">server/data/chat-log.jsonl</code></li>
-              </ol>
 
               <div class="admin-chat-log__toolbar">
                 <div class="field">
@@ -263,6 +240,7 @@
       </div>
     </main>
 
+    <script src="js/app-shell.js" defer></script>
     <script src="js/admin-chat-log.js" defer></script>
   </body>
 </html>

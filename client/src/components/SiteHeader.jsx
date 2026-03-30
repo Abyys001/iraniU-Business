@@ -1,0 +1,46 @@
+import { Link, NavLink } from "react-router-dom";
+
+export default function SiteHeader() {
+  return (
+    <header className="site-header">
+      <div className="site-header__inner">
+        <Link className="logo" to="/">
+          <span className="logo__mark" aria-hidden="true">
+            ای
+          </span>
+          <span>ایرانیو</span>
+        </Link>
+        <input type="checkbox" id="site-nav-toggle" className="site-nav-cb" />
+        <label htmlFor="site-nav-toggle" className="nav-toggle" aria-label="باز و بسته کردن منو">
+          <span></span>
+          <span></span>
+          <span></span>
+        </label>
+        <nav className="nav" id="site-nav" aria-label="اصلی">
+          <ul className="nav__links">
+            <li>
+              <NavLink to="/">خانه</NavLink>
+            </li>
+            <li>
+              <NavLink to="/listings">لیست کسب‌وکارها</NavLink>
+            </li>
+            <li>
+              <NavLink to="/advertise">تبلیغات و بسته‌ها</NavLink>
+            </li>
+            <li>
+              <NavLink to="/dashboard">پنل کسب‌وکار</NavLink>
+            </li>
+          </ul>
+          <div className="nav__cta">
+            <Link className="btn btn--ghost" to="/onboarding">
+              ثبت کسب‌وکار
+            </Link>
+            <Link className="btn btn--primary" to="/listings">
+              جستجو
+            </Link>
+          </div>
+        </nav>
+      </div>
+    </header>
+  );
+}

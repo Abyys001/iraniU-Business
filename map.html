@@ -5,12 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#3a0b47" />
     <title>نقشهٔ کسب‌وکارها — ایرانیو</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="css/styles.css" />
     <link
       rel="stylesheet"
@@ -133,7 +127,10 @@
           <span aria-hidden="true">×</span>
         </button>
         <span id="map-business-modal-badge" class="map-business-modal__badge" hidden>ویژه</span>
-        <div class="map-business-modal__logo-wrap">
+        <div
+          id="map-business-modal-logo-wrap"
+          class="map-business-modal__logo-wrap img-shimmer-host is-loaded"
+        >
           <img
             id="map-business-modal-logo"
             class="map-business-modal__logo-img"
@@ -158,9 +155,5 @@
       defer
     ></script>
     <script src="js/directory-map.js" defer></script>
-    <script>
-      window.IRANIU_CHAT = window.IRANIU_CHAT || { relayUrl: '' };
-    </script>
-    <script src="js/chat-widget.js" defer></script>
   </body>
 </html>

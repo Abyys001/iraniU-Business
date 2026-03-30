@@ -1,0 +1,325 @@
+import { db } from "./db.js";
+import {
+  hashPassword,
+  verifyPassword,
+  signManagerToken,
+  signSuperAdminToken,
+  parseAuthHeader,
+  totpVerify,
+  totpGenerateSecret,
+  stripManagerRow,
+  stripSuperAdminRow,
+} from "./authUtil.js";
+import { requireSuperAdmin } from "./authMiddleware.js";
+import {
+  clientIp,
+  notifyTelegramSuperAdminLogin,
+  processTelegramWebhook,
+  sendTelegramTestMessage,
+} from "./telegramNotify.js";
+import { assertLoginNotBlocked, recordLoginFailure, recordLoginSuccess } from "./bruteForce.js";
+import {
+  getTelegramConfigForAdmin,
+  applyTelegramConfigPatch,
+  getEffectiveTelegramConfig,
+} from "./telegramSettings.js";
+
+function attachLinkedBusinesses(managerRow) {
+  const linked_businesses = db
+    .prepare(
+      `SELECT slug, name_fa, status, claimed, package, city FROM businesses WHERE manager_id = ? ORDER BY name_fa`
+    )
+    .all(managerRow.id);
+  return {
+    ...stripManagerRow(managerRow),
+    linked_businesses,
+    password_set: !!managerRow.password_hash,
+    totp_enabled: !!managerRow.totp_enabled,
+  };
+}
+
+export function ensureSuperAdminFromEnv() {
+  try {
+    const n = db.prepare(`SELECT COUNT(*) AS c FROM super_admins`).get().c;
+    if (n > 0) return;
+    const email = process.env.SUPER_ADMIN_EMAIL?.trim().toLowerCase();
+    const password = process.env.SUPER_ADMIN_PASSWORD;
+    if (!email || !password) {
+      console.warn(
+        "[auth] هیچ سوپرادمینی در دیتابیس نیست. برای ساخت اولیه SUPER_ADMIN_EMAIL و SUPER_ADMIN_PASSWORD را در محیط تنظیم کنید."
+      );
+      return;
+    }
+    const hash = hashPassword(password);
+    db.prepare(`INSERT INTO super_admins (email, password_hash, name) VALUES (?, ?, ?)`).run(
+      email,
+      hash,
+      "Super Admin"
+    );
+    console.log("[auth] اولین سوپرادمین از متغیرهای محیط ساخته شد.");
+  } catch (e) {
+    console.error("[auth] ensureSuperAdminFromEnv", e);
+  }
+}
+
+export function registerAuthRoutes(app) {
+  app.post("/api/auth/login/manager", (req, res) => {
+    const b = req.body && typeof req.body === "object" ? req.body : {};
+    const email = String(b.email || "")
+      .trim()
+      .toLowerCase();
+    const password = String(b.password || "");
+    const totp = b.totp != null && b.totp !== "" ? String(b.totp).trim() : null;
+    if (!email || !password) {
+      return res.status(400).json({ error: "missing_credentials" });
+    }
+    if (!assertLoginNotBlocked(req, res)) return;
+
+    const m = db.prepare(`SELECT * FROM managers WHERE email = ?`).get(email);
+    if (!m || !m.password_hash) {
+      recordLoginFailure(req);
+      return res.status(401).json({ error: "invalid_credentials" });
+    }
+    if (!verifyPassword(password, m.password_hash)) {
+      recordLoginFailure(req);
+      return res.status(401).json({ error: "invalid_credentials" });
+    }
+    if (m.totp_enabled) {
+      if (!totp || !m.totp_secret) {
+        recordLoginFailure(req);
+        return res.status(401).json({ error: "totp_required", hint: "کد Google Authenticator را وارد کنید" });
+      }
+      if (!totpVerify(m.totp_secret, totp)) {
+        recordLoginFailure(req);
+        return res.status(401).json({ error: "invalid_totp" });
+      }
+    }
+    recordLoginSuccess(req);
+    const token = signManagerToken(m.id);
+    res.json({
+      token,
+      user: attachLinkedBusinesses(m),
+      role: "manager",
+    });
+  });
+
+  app.post("/api/auth/login/admin", (req, res) => {
+    const b = req.body && typeof req.body === "object" ? req.body : {};
+    const email = String(b.email || "")
+      .trim()
+      .toLowerCase();
+    const password = String(b.password || "");
+    const totp = b.totp != null && b.totp !== "" ? String(b.totp).trim() : null;
+    if (!email || !password) {
+      return res.status(400).json({ error: "missing_credentials" });
+    }
+    if (!assertLoginNotBlocked(req, res)) return;
+
+    const a = db.prepare(`SELECT * FROM super_admins WHERE email = ?`).get(email);
+    if (!a) {
+      recordLoginFailure(req);
+      return res.status(401).json({ error: "invalid_credentials" });
+    }
+    if (!verifyPassword(password, a.password_hash)) {
+      recordLoginFailure(req);
+      return res.status(401).json({ error: "invalid_credentials" });
+    }
+    if (a.totp_enabled) {
+      if (!totp || !a.totp_secret) {
+        recordLoginFailure(req);
+        return res.status(401).json({ error: "totp_required" });
+      }
+      if (!totpVerify(a.totp_secret, totp)) {
+        recordLoginFailure(req);
+        return res.status(401).json({ error: "invalid_totp" });
+      }
+    }
+    recordLoginSuccess(req);
+    const token = signSuperAdminToken(a.id);
+    void notifyTelegramSuperAdminLogin({
+      email: a.email,
+      ip: clientIp(req),
+      userAgent: req.headers["user-agent"],
+      adminId: a.id,
+      loggedInWith2fa: !!a.totp_enabled,
+    });
+    res.json({
+      token,
+      user: stripSuperAdminRow(a),
+      role: "superadmin",
+    });
+  });
+
+  app.get("/api/auth/me", (req, res) => {
+    const p = parseAuthHeader(req);
+    if (!p) return res.status(401).json({ error: "unauthorized" });
+    if (p.typ === "mgr") {
+      const m = db.prepare(`SELECT * FROM managers WHERE id = ?`).get(p.sub);
+      if (!m) return res.status(401).json({ error: "invalid_token" });
+      return res.json({
+        role: "manager",
+        user: attachLinkedBusinesses(m),
+        totp_enabled: !!m.totp_enabled,
+      });
+    }
+    if (p.typ === "adm") {
+      const a = db.prepare(`SELECT * FROM super_admins WHERE id = ?`).get(p.sub);
+      if (!a) return res.status(401).json({ error: "invalid_token" });
+      return res.json({
+        role: "superadmin",
+        user: stripSuperAdminRow(a),
+        totp_enabled: !!a.totp_enabled,
+      });
+    }
+    return res.status(401).json({ error: "unauthorized" });
+  });
+
+  app.post("/api/auth/logout", (_req, res) => {
+    res.json({ ok: true });
+  });
+
+  /** شروع TOTP — ذخیرهٔ موقت secret تا تأیید با یک کد */
+  app.post("/api/auth/manager/2fa/setup", (req, res) => {
+    const p = parseAuthHeader(req);
+    if (!p || p.typ !== "mgr") return res.status(401).json({ error: "unauthorized" });
+    const sec = totpGenerateSecret();
+    db.prepare(`UPDATE managers SET totp_secret = ?, totp_enabled = 0 WHERE id = ?`).run(sec.base32, p.sub);
+    res.json({
+      secret: sec.base32,
+      otpauth_url: sec.otpauth_url,
+    });
+  });
+
+  app.post("/api/auth/manager/2fa/enable", (req, res) => {
+    const p = parseAuthHeader(req);
+    if (!p || p.typ !== "mgr") return res.status(401).json({ error: "unauthorized" });
+    const token = String((req.body && req.body.token) || "").trim();
+    const m = db.prepare(`SELECT * FROM managers WHERE id = ?`).get(p.sub);
+    if (!m?.totp_secret) return res.status(400).json({ error: "setup_first" });
+    if (!totpVerify(m.totp_secret, token)) {
+      return res.status(400).json({ error: "invalid_totp" });
+    }
+    db.prepare(`UPDATE managers SET totp_enabled = 1 WHERE id = ?`).run(p.sub);
+    res.json({ ok: true, totp_enabled: true });
+  });
+
+  app.post("/api/auth/manager/2fa/disable", (req, res) => {
+    const p = parseAuthHeader(req);
+    if (!p || p.typ !== "mgr") return res.status(401).json({ error: "unauthorized" });
+    const password = String((req.body && req.body.password) || "");
+    const m = db.prepare(`SELECT * FROM managers WHERE id = ?`).get(p.sub);
+    if (!m || !verifyPassword(password, m.password_hash)) {
+      return res.status(401).json({ error: "invalid_password" });
+    }
+    db.prepare(`UPDATE managers SET totp_secret = NULL, totp_enabled = 0 WHERE id = ?`).run(p.sub);
+    res.json({ ok: true, totp_enabled: false });
+  });
+
+  app.post("/api/auth/admin/2fa/setup", (req, res) => {
+    const p = parseAuthHeader(req);
+    if (!p || p.typ !== "adm") return res.status(401).json({ error: "unauthorized" });
+    const row = db.prepare(`SELECT email FROM super_admins WHERE id = ?`).get(p.sub);
+    const label = row?.email ? `Iraniu Admin (${row.email})` : "Iraniu Admin";
+    const sec = totpGenerateSecret(label);
+    db.prepare(`UPDATE super_admins SET totp_secret = ?, totp_enabled = 0 WHERE id = ?`).run(sec.base32, p.sub);
+    res.json({
+      secret: sec.base32,
+      otpauth_url: sec.otpauth_url,
+    });
+  });
+
+  app.post("/api/auth/admin/2fa/enable", (req, res) => {
+    const p = parseAuthHeader(req);
+    if (!p || p.typ !== "adm") return res.status(401).json({ error: "unauthorized" });
+    const token = String((req.body && req.body.token) || "").trim();
+    const a = db.prepare(`SELECT * FROM super_admins WHERE id = ?`).get(p.sub);
+    if (!a?.totp_secret) return res.status(400).json({ error: "setup_first" });
+    if (!totpVerify(a.totp_secret, token)) {
+      return res.status(400).json({ error: "invalid_totp" });
+    }
+    db.prepare(`UPDATE super_admins SET totp_enabled = 1 WHERE id = ?`).run(p.sub);
+    res.json({ ok: true, totp_enabled: true });
+  });
+
+  app.post("/api/auth/admin/2fa/disable", (req, res) => {
+    const p = parseAuthHeader(req);
+    if (!p || p.typ !== "adm") return res.status(401).json({ error: "unauthorized" });
+    const password = String((req.body && req.body.password) || "");
+    const a = db.prepare(`SELECT * FROM super_admins WHERE id = ?`).get(p.sub);
+    if (!a || !verifyPassword(password, a.password_hash)) {
+      return res.status(401).json({ error: "invalid_password" });
+    }
+    db.prepare(`UPDATE super_admins SET totp_secret = NULL, totp_enabled = 0 WHERE id = ?`).run(p.sub);
+    res.json({ ok: true, totp_enabled: false });
+  });
+
+  app.get("/api/admin/telegram-status", requireSuperAdmin, (_req, res) => {
+    res.json(getTelegramConfigForAdmin());
+  });
+
+  app.get("/api/admin/telegram-config", requireSuperAdmin, (_req, res) => {
+    res.json(getTelegramConfigForAdmin());
+  });
+
+  app.patch("/api/admin/telegram-config", requireSuperAdmin, (req, res) => {
+    try {
+      const next = applyTelegramConfigPatch(req.body || {});
+      res.json(next);
+    } catch (e) {
+      console.error("telegram-config patch", e);
+      res.status(500).json({ error: "server_error" });
+    }
+  });
+
+  /** تلگرام: دکمهٔ Kick out — باید webhook با setWebhook ثبت شود */
+  app.post("/api/telegram/webhook", async (req, res) => {
+    const secret = getEffectiveTelegramConfig().webhookSecret;
+    if (secret) {
+      const got = req.headers["x-telegram-bot-api-secret-token"];
+      if (got !== secret) {
+        return res.status(401).json({ error: "unauthorized" });
+      }
+    } else {
+      console.warn("[telegram] webhook called but TELEGRAM_WEBHOOK_SECRET is not set — ignoring");
+      return res.status(503).json({ error: "webhook_not_configured" });
+    }
+    try {
+      await processTelegramWebhook(req.body || {});
+    } catch (e) {
+      console.error("[telegram] webhook", e);
+    }
+    res.sendStatus(200);
+  });
+
+  app.post("/api/admin/telegram-test", requireSuperAdmin, async (_req, res) => {
+    const r = await sendTelegramTestMessage();
+    if (r.skipped) {
+      return res.status(400).json({
+        error: "telegram_not_configured",
+        hint: "توکن ربات و شناسهٔ چت را در امنیت و تلگرام ذخیره کنید یا در .env بگذارید",
+      });
+    }
+    if (!r.ok) {
+      return res.status(502).json({
+        error: "telegram_send_failed",
+        hint: typeof r.error === "string" ? r.error : "پاسخ ناموفق از تلگرام — سرور را ببینید",
+      });
+    }
+    res.json({ ok: true });
+  });
+
+  /** سوپرادمین: تعیین/تغییر رمز مدیر */
+  app.patch("/api/admin/managers/:id/password", requireSuperAdmin, (req, res) => {
+    const id = parseInt(String(req.params.id || ""), 10);
+    if (!Number.isFinite(id)) return res.status(400).json({ error: "bad_id" });
+    const password = String((req.body && req.body.password) || "").trim();
+    if (password.length < 8) {
+      return res.status(400).json({ error: "password_too_short", hint: "حداقل ۸ کاراکتر" });
+    }
+    const m = db.prepare(`SELECT id FROM managers WHERE id = ?`).get(id);
+    if (!m) return res.status(404).json({ error: "not_found" });
+    const hash = hashPassword(password);
+    db.prepare(`UPDATE managers SET password_hash = ? WHERE id = ?`).run(hash, id);
+    res.json({ ok: true });
+  });
+}

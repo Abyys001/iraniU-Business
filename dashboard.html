@@ -5,13 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#3a0b47" />
     <title>پنل کسب‌وکار — ویرایش آگهی — ایرانیو</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap"
-      rel="stylesheet"
-    />
     <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="qr-code-template-main/qr-print-template.css" />
   </head>
   <body class="app-shell-body">
     <script src="js/require-mobile.js"></script>
@@ -98,6 +93,16 @@
             </a>
           </li>
           <li>
+            <a href="#qr-review">
+              <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path
+                  d="M3 3h7v7H3V3zm11 0h7v7h-7V3zM3 14h7v7H3v-7zm11 0h7v7h-7v-7z"
+                />
+              </svg>
+              QR نظر Google
+            </a>
+          </li>
+          <li>
             <a href="business.html">
               <svg class="app-shell__nav-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
                 <path
@@ -136,7 +141,7 @@
           </label>
           <div class="app-shell__header-text">
             <h1>پنل کسب‌وکار</h1>
-            <p>سلام! خوش آمدید — رستوران سفره · آخرین ویرایش: نمونه (بدون سرور)</p>
+            <p>سلام! خوش آمدید — رستوران نمونه · آخرین ویرایش: نمونه (بدون سرور)</p>
           </div>
           <div class="app-shell__search-wrap">
             <label class="visually-hidden" for="dash-global-search">جستجو در پنل</label>
@@ -172,7 +177,7 @@
             <div class="app-shell__user">
               <div class="app-shell__user-avatar" aria-hidden="true">س</div>
               <div class="app-shell__user-text">
-                <strong>رستوران سفره</strong>
+                <strong>رستوران نمونه</strong>
                 <small>مالک آگهی</small>
               </div>
             </div>
@@ -203,12 +208,13 @@
                         <path
                           stroke="#fff"
                           stroke-width="2"
-                          d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+                          d="M4 4h5v5H4V4zm11 0h5v5h-5V4zM4 15h5v5H4v-5zm11 0h5v5h-5v-5z"
                         />
-                        <circle cx="12" cy="12" r="3" stroke="#fff" stroke-width="2" />
+                        <path stroke="#fff" stroke-width="2" d="M9 9h6v6H9z" />
                       </svg>
-                      <p class="app-shell__metric-label">بازدید نمونه (۳۰ روز)</p>
-                      <p class="app-shell__metric-value">۱٬۲۳۴</p>
+                      <p class="app-shell__metric-label">اسکن QR نظر Google</p>
+                      <p class="app-shell__metric-value" id="dash-metric-qr-scans" dir="ltr">—</p>
+                      <p class="app-shell__metric-hint">همان شمارندهٔ بخش «QR نظر Google» پایین صفحه</p>
                     </div>
                     <div class="app-shell__metric app-shell__metric--purple">
                       <svg
@@ -285,7 +291,7 @@
                     <div class="form-grid">
                       <div class="field">
                         <label for="dash-name">نام کسب‌وکار</label>
-                        <input type="text" id="dash-name" name="name" value="رستوران سفره" required />
+                        <input type="text" id="dash-name" name="name" value="رستوران نمونه" required />
                       </div>
                       <div class="field">
                         <label for="dash-slug">نامک در آدرس (انگلیسی)</label>
@@ -421,6 +427,88 @@
                     </div>
                   </div>
                 </section>
+
+                <section class="dashboard-panel dashboard-panel--qr-review" id="qr-review" aria-labelledby="qr-review-heading">
+                  <h2 id="qr-review-heading">QR نظر Google</h2>
+                  <p class="field-hint">
+                    لینک کوتاه نظر (مثلاً g.page) یا لینک Maps را بگذارید. کد QR ابتدا به صفحهٔ ردیابی ایرانیو می‌رود،
+                    شمارنده ثبت می‌شود، سپس کاربر به Google هدایت می‌شود. برای چاپ، لوگو و نام زیر را تنظیم کنید.
+                  </p>
+                  <div class="form-grid">
+                    <div class="field">
+                      <label for="qr-review-bid">شناسهٔ یکتا برای آمار (حروف انگلیسی، اعداد، خط تیره)</label>
+                      <input type="text" id="qr-review-bid" name="qr_bid" autocomplete="off" spellcheck="false" />
+                      <p class="field-hint">این شناسه در آدرس ردیابی و شمارش اسکن استفاده می‌شود؛ عوض نکنید مگر آگهی جدید.</p>
+                    </div>
+                    <div class="field field--block">
+                      <label for="qr-review-google-url">لینک صفحهٔ نظر Google</label>
+                      <input
+                        type="url"
+                        id="qr-review-google-url"
+                        name="qr_google_review"
+                        inputmode="url"
+                        placeholder="https://g.page/.../review یا لینک نقشهٔ Google"
+                      />
+                    </div>
+                    <div class="field field--block">
+                      <label for="qr-review-business-name">نام روی چاپ</label>
+                      <input type="text" id="qr-review-business-name" value="رستوران نمونه" />
+                    </div>
+                    <div class="field field--block">
+                      <label for="qr-print-theme">قالب چاپ (رنگ)</label>
+                      <select id="qr-print-theme">
+                        <option value="1">۱ — بنفش برند ایرانیو</option>
+                        <option value="2">۲ — فیروزه‌ای</option>
+                        <option value="3">۳ — طلایی / کهربایی</option>
+                        <option value="4">۴ — سرمه‌ای</option>
+                        <option value="5">۵ — گل‌سرخی</option>
+                        <option value="6">۶ — سبز جنگلی</option>
+                        <option value="7">۷ — نارنجی</option>
+                        <option value="8">۸ — نیلی / ایندیگو</option>
+                        <option value="9">۹ — خاکستری تیره</option>
+                        <option value="10">۱۰ — سرخابی</option>
+                        <option value="11">۱۱ — سبز زیتونی / لیمویی</option>
+                        <option value="12">۱۲ — آبی آسمانی</option>
+                        <option value="13">۱۳ — زرشکی</option>
+                        <option value="14">۱۴ — بنفش روشن</option>
+                        <option value="15">۱۵ — کهربایی / آمبر</option>
+                        <option value="16">۱۶ — فیروزه‌ای نعنایی</option>
+                        <option value="17">۱۷ — آلوئی</option>
+                        <option value="18">۱۸ — آبی جین</option>
+                        <option value="19">۱۹ — مرجانی</option>
+                        <option value="20">۲۰ — فیروزه‌ای نیمه‌شب</option>
+                      </select>
+                      <p class="field-hint">همان قالب در پیش‌نمای چاپ و رنگ ماژول‌های QR اعمال می‌شود.</p>
+                    </div>
+                    <div class="field field--block">
+                      <label for="qr-review-logo">لوگو روی چاپ</label>
+                      <input type="file" id="qr-review-logo" accept="image/*" />
+                      <p class="field-hint">پیش‌نمایش پایین؛ فقط برای چاپ برگهٔ تبلیغاتی.</p>
+                      <div class="dashboard-qr-logo-preview-wrap">
+                        <img id="qr-logo-preview" class="dashboard-qr-logo-preview" alt="" width="120" height="120" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="dashboard-actions dashboard-actions--inline">
+                    <button type="button" class="btn btn--primary" id="qr-btn-generate">ساخت QR و لینک ردیابی</button>
+                    <button type="button" class="btn btn--ghost" id="qr-btn-print" disabled>
+                      چاپ برگه با لوگو
+                    </button>
+                    <button type="button" class="btn btn--ghost" id="qr-btn-refresh-stats">بروزرسانی آمار اسکن</button>
+                  </div>
+                  <div class="dashboard-qr-preview" id="qr-preview-wrap" hidden>
+                    <div class="dashboard-qr-analytics">
+                      <p class="dashboard-qr-analytics__line">
+                        <strong>تعداد اسکن QR:</strong>
+                        <span id="qr-scan-count" class="dashboard-qr-analytics__value">—</span>
+                      </p>
+                      <p class="field-hint" id="qr-stats-hint"></p>
+                    </div>
+                    <label class="dashboard-qr-tracking-label" for="qr-tracking-url">لینک ردیابی (درون کد QR)</label>
+                    <input type="text" readonly class="dashboard-qr-tracking-url" id="qr-tracking-url" />
+                    <div class="dashboard-qr-canvas-wrap" id="qr-canvas-parent"></div>
+                  </div>
+                </section>
               </div>
             </div>
           </div>
@@ -428,9 +516,10 @@
       </div>
     </div>
 
-    <script>
-      window.IRANIU_CHAT = window.IRANIU_CHAT || { relayUrl: '' };
-    </script>
-    <script src="js/chat-widget.js" defer></script>
+    <div id="qr-print-mount" class="dashboard-qr-print-mount" aria-hidden="true"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js" crossorigin="anonymous"></script>
+    <script src="js/dashboard-qr-review.js" defer></script>
+    <script src="js/app-shell.js" defer></script>
   </body>
 </html>

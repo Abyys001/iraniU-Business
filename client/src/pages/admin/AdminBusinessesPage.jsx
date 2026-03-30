@@ -14,7 +14,7 @@ export default function AdminBusinessesPage() {
     setSendingSlug(slug);
     try {
       await apiPost(`/api/admin/businesses/${encodeURIComponent(slug)}/send-to-telegram-channel`, {});
-      setToast({ type: "ok", text: `«${slug}» در کانال دایرکتوری منتشر شد.` });
+      setToast({ type: "ok", text: "آگهی در کانال دایرکتوری منتشر شد." });
     } catch (e) {
       setToast({ type: "err", text: e.message || String(e) });
     } finally {
@@ -40,10 +40,6 @@ export default function AdminBusinessesPage() {
       </p>
       <section className="dashboard-panel">
         <h2>همه آگهی‌ها</h2>
-        <p className="field-hint" style={{ marginTop: 0 }}>
-          برای ویرایش روی «ویرایش» بزنید — همان فرم داشبورد با ذخیره در SQLite (
-          <code>POST /api/businesses/update</code>).
-        </p>
         {loading && <p className="field-hint">در حال بارگذاری…</p>}
         {err && <p className="field-hint">{err}</p>}
         {toast && (

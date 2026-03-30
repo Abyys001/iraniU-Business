@@ -10,6 +10,7 @@ const adminNav = [
   { to: "/admin-edit", label: "ویرایش آگهی" },
   { to: "/admin-add", label: "افزودن آگهی" },
   { to: "/admin-categories", label: "دسته‌بندی‌ها" },
+  { to: "/admin-qr-export", label: "خروجی QR" },
   { to: "/admin-claims", label: "درخواست‌های ادعا" },
   { to: "/admin-link", label: "لینک آگهی ↔ مدیر" },
   { to: "/admin-billing", label: "صورت‌حساب" },

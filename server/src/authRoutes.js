@@ -23,6 +23,7 @@ import {
   applyTelegramConfigPatch,
   getEffectiveTelegramConfig,
 } from "./telegramSettings.js";
+import { actorFromAuth, writeSystemLog } from "./systemLog.js";
 
 function attachLinkedBusinesses(managerRow) {
   const linked_businesses = db
@@ -200,6 +201,13 @@ export function registerAuthRoutes(app) {
       return res.status(400).json({ error: "invalid_totp" });
     }
     db.prepare(`UPDATE managers SET totp_enabled = 1 WHERE id = ?`).run(p.sub);
+    writeSystemLog({
+      ...actorFromAuth(p),
+      action: "manager_2fa_enabled",
+      targetType: "manager",
+      targetId: p.sub,
+      message: "Manager enabled 2FA",
+    });
     res.json({ ok: true, totp_enabled: true });
   });
 
@@ -212,6 +220,13 @@ export function registerAuthRoutes(app) {
       return res.status(401).json({ error: "invalid_password" });
     }
     db.prepare(`UPDATE managers SET totp_secret = NULL, totp_enabled = 0 WHERE id = ?`).run(p.sub);
+    writeSystemLog({
+      ...actorFromAuth(p),
+      action: "manager_2fa_disabled",
+      targetType: "manager",
+      targetId: p.sub,
+      message: "Manager disabled 2FA",
+    });
     res.json({ ok: true, totp_enabled: false });
   });
 
@@ -238,6 +253,13 @@ export function registerAuthRoutes(app) {
       return res.status(400).json({ error: "invalid_totp" });
     }
     db.prepare(`UPDATE super_admins SET totp_enabled = 1 WHERE id = ?`).run(p.sub);
+    writeSystemLog({
+      ...actorFromAuth(p),
+      action: "admin_2fa_enabled",
+      targetType: "superadmin",
+      targetId: p.sub,
+      message: "Super admin enabled 2FA",
+    });
     res.json({ ok: true, totp_enabled: true });
   });
 
@@ -250,6 +272,13 @@ export function registerAuthRoutes(app) {
       return res.status(401).json({ error: "invalid_password" });
     }
     db.prepare(`UPDATE super_admins SET totp_secret = NULL, totp_enabled = 0 WHERE id = ?`).run(p.sub);
+    writeSystemLog({
+      ...actorFromAuth(p),
+      action: "admin_2fa_disabled",
+      targetType: "superadmin",
+      targetId: p.sub,
+      message: "Super admin disabled 2FA",
+    });
     res.json({ ok: true, totp_enabled: false });
   });
 
@@ -264,6 +293,13 @@ export function registerAuthRoutes(app) {
   app.patch("/api/admin/telegram-config", requireSuperAdmin, (req, res) => {
     try {
       const next = applyTelegramConfigPatch(req.body || {});
+      writeSystemLog({
+        ...actorFromAuth(req.auth),
+        action: "admin_telegram_config_updated",
+        targetType: "settings",
+        targetId: "telegram",
+        message: "Super admin updated telegram configuration",
+      });
       res.json(next);
     } catch (e) {
       console.error("telegram-config patch", e);
@@ -320,6 +356,13 @@ export function registerAuthRoutes(app) {
     if (!m) return res.status(404).json({ error: "not_found" });
     const hash = hashPassword(password);
     db.prepare(`UPDATE managers SET password_hash = ? WHERE id = ?`).run(hash, id);
+    writeSystemLog({
+      ...actorFromAuth(req.auth),
+      action: "manager_password_reset",
+      targetType: "manager",
+      targetId: id,
+      message: `Manager password reset for manager #${id}`,
+    });
     res.json({ ok: true });
   });
 }

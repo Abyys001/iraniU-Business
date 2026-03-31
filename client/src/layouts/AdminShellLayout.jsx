@@ -16,6 +16,7 @@ const adminNav = [
   { to: "/admin-billing", label: "صورت‌حساب" },
   { to: "/admin-managers", label: "حساب‌های مدیر" },
   { to: "/admin-chat-log", label: "گفتگو و لاگ سایت" },
+  { to: "/admin-system-logs", label: "لاگ سیستم" },
 ];
 
 export default function AdminShellLayout() {

@@ -127,6 +127,21 @@ function ensureAdminTables() {
       path TEXT,
       created_at TEXT NOT NULL DEFAULT (datetime('now'))
     );
+    CREATE TABLE IF NOT EXISTS system_logs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      level TEXT NOT NULL DEFAULT 'info',
+      actor_type TEXT NOT NULL DEFAULT 'system',
+      actor_id TEXT,
+      action TEXT NOT NULL,
+      target_type TEXT,
+      target_id TEXT,
+      message TEXT,
+      meta_json TEXT,
+      created_at TEXT NOT NULL DEFAULT (datetime('now'))
+    );
+    CREATE INDEX IF NOT EXISTS idx_system_logs_created ON system_logs(created_at DESC);
+    CREATE INDEX IF NOT EXISTS idx_system_logs_level ON system_logs(level);
+    CREATE INDEX IF NOT EXISTS idx_system_logs_action ON system_logs(action);
     CREATE TABLE IF NOT EXISTS reservations (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       business_slug TEXT NOT NULL,

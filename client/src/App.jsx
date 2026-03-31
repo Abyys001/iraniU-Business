@@ -31,6 +31,7 @@ import AdminLinkPage from "./pages/admin/AdminLinkPage.jsx";
 import AdminBillingPage from "./pages/admin/AdminBillingPage.jsx";
 import AdminManagersPage from "./pages/admin/AdminManagersPage.jsx";
 import AdminChatLogPage from "./pages/admin/AdminChatLogPage.jsx";
+import AdminSystemLogsPage from "./pages/admin/AdminSystemLogsPage.jsx";
 import AdminSecurityPage from "./pages/admin/AdminSecurityPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import ManagerLoginPage from "./pages/ManagerLoginPage.jsx";
@@ -95,6 +96,7 @@ export default function App() {
         <Route path="/admin-billing" element={<AdminBillingPage />} />
         <Route path="/admin-managers" element={<AdminManagersPage />} />
         <Route path="/admin-chat-log" element={<AdminChatLogPage />} />
+        <Route path="/admin-system-logs" element={<AdminSystemLogsPage />} />
         <Route path="/admin-security" element={<AdminSecurityPage />} />
       </Route>
 

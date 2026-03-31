@@ -11,6 +11,7 @@ import { requireSuperAdmin, requireManager } from "./authMiddleware.js";
 import { registerAuthRoutes, ensureSuperAdminFromEnv } from "./authRoutes.js";
 import { sendBusinessDirectoryPost } from "./telegramBusinessChannel.js";
 import { sendReservationEmails, sendManagerTelegramBooking } from "./bookingNotify.js";
+import { actorFromAuth, writeSystemLog } from "./systemLog.js";
 
 const PATCHABLE_BUSINESS = new Set([
   "name_fa",
@@ -274,6 +275,13 @@ app.post("/api/managers", requireSuperAdmin, (req, res) => {
       .prepare(`INSERT INTO managers (email, name, phone, password_hash) VALUES (?, ?, ?, ?)`)
       .run(email, name, String(b.phone || "").trim() || null, ph);
     const row = db.prepare(`SELECT * FROM managers WHERE id = ?`).get(info.lastInsertRowid);
+    writeSystemLog({
+      ...actorFromAuth(req.auth),
+      action: "manager_created",
+      targetType: "manager",
+      targetId: row.id,
+      message: `Manager created: ${row.email}`,
+    });
     res.status(201).json(attachLinkedBusinesses(row));
   } catch (e) {
     if (String(e.message || "").includes("UNIQUE")) {
@@ -290,12 +298,26 @@ app.patch("/api/admin/businesses/:slug/manager", requireSuperAdmin, (req, res) =
   const mid = req.body && req.body.manager_id;
   if (mid === null || mid === undefined || mid === "") {
     db.prepare(`UPDATE businesses SET manager_id = NULL WHERE slug = ?`).run(slug);
+    writeSystemLog({
+      ...actorFromAuth(req.auth),
+      action: "business_manager_unlinked",
+      targetType: "business",
+      targetId: slug,
+      message: `Manager unlinked from business ${slug}`,
+    });
   } else {
     const id = parseInt(String(mid), 10);
     if (!Number.isFinite(id)) return res.status(400).json({ error: "bad_manager_id" });
     const m = db.prepare(`SELECT id FROM managers WHERE id = ?`).get(id);
     if (!m) return res.status(400).json({ error: "invalid_manager_id" });
     db.prepare(`UPDATE businesses SET manager_id = ? WHERE slug = ?`).run(id, slug);
+    writeSystemLog({
+      ...actorFromAuth(req.auth),
+      action: "business_manager_linked",
+      targetType: "business",
+      targetId: slug,
+      message: `Manager #${id} linked to business ${slug}`,
+    });
   }
   const row = db.prepare(`SELECT * FROM businesses WHERE slug = ?`).get(slug);
   res.json(row);
@@ -320,11 +342,27 @@ app.post("/api/admin/businesses/:slug/send-to-telegram-channel", requireSuperAdm
       });
     }
     if (!result.ok) {
+      writeSystemLog({
+        ...actorFromAuth(req.auth),
+        level: "warn",
+        action: "telegram_channel_post_failed",
+        targetType: "business",
+        targetId: slug,
+        message: `Telegram post failed for ${slug}`,
+        meta: { description: result.description || null },
+      });
       return res.status(502).json({
         error: "telegram_failed",
         hint: result.description || "ارسال ناموفق",
       });
     }
+    writeSystemLog({
+      ...actorFromAuth(req.auth),
+      action: "telegram_channel_post_sent",
+      targetType: "business",
+      targetId: slug,
+      message: `Business posted to telegram channel: ${slug}`,
+    });
     res.json({ ok: true });
   } catch (e) {
     console.error("send-to-telegram-channel", e);
@@ -352,6 +390,13 @@ app.post("/api/admin/categories", requireSuperAdmin, (req, res) => {
       .prepare(`INSERT INTO business_categories (name, sort_order, is_active) VALUES (?, ?, 1)`)
       .run(name, nextOrder);
     const row = db.prepare(`SELECT id, name, sort_order, is_active, created_at FROM business_categories WHERE id = ?`).get(info.lastInsertRowid);
+    writeSystemLog({
+      ...actorFromAuth(req.auth),
+      action: "category_created",
+      targetType: "category",
+      targetId: row.id,
+      message: `Category created: ${row.name}`,
+    });
     res.status(201).json(row);
   } catch (e) {
     if (String(e.message || "").includes("UNIQUE")) return res.status(409).json({ error: "name_taken" });
@@ -382,6 +427,14 @@ app.patch("/api/admin/categories/:id", requireSuperAdmin, (req, res) => {
   const setClause = keys.map((k) => `${k} = @${k}`).join(", ");
   db.prepare(`UPDATE business_categories SET ${setClause} WHERE id = @id`).run({ ...updates, id });
   const row = db.prepare(`SELECT id, name, sort_order, is_active, created_at FROM business_categories WHERE id = ?`).get(id);
+  writeSystemLog({
+    ...actorFromAuth(req.auth),
+    action: "category_updated",
+    targetType: "category",
+    targetId: row.id,
+    message: `Category updated: ${row.name}`,
+    meta: { fields: keys },
+  });
   res.json(row);
 });
 
@@ -410,6 +463,14 @@ app.post("/api/admin/billing", requireSuperAdmin, (req, res) => {
       String(b.note ?? "")
     );
   const row = db.prepare(`SELECT * FROM billing_records WHERE id = ?`).get(info.lastInsertRowid);
+  writeSystemLog({
+    ...actorFromAuth(req.auth),
+    action: "billing_created",
+    targetType: "business",
+    targetId: business_slug,
+    message: `Billing record created for ${business_slug}`,
+    meta: { status: row.status, amount: row.amount || null },
+  });
   res.status(201).json(row);
 });
 
@@ -431,6 +492,28 @@ app.get("/api/admin/site-chat", requireSuperAdmin, (req, res) => {
   const rows = db
     .prepare(`SELECT * FROM site_chat_messages ORDER BY created_at DESC LIMIT ?`)
     .all(limit);
+  res.json(rows);
+});
+
+app.get("/api/admin/system-logs", requireSuperAdmin, (req, res) => {
+  const limit = Math.min(1000, Math.max(1, parseInt(String(req.query.limit || "200"), 10) || 200));
+  const level = String(req.query.level || "").trim().toLowerCase();
+  const actor = String(req.query.actor_type || "").trim().toLowerCase();
+  const levelOk = ["info", "warn", "error"].includes(level);
+  const actorOk = ["system", "superadmin", "manager"].includes(actor);
+  const where = [];
+  const params = [];
+  if (levelOk) {
+    where.push("level = ?");
+    params.push(level);
+  }
+  if (actorOk) {
+    where.push("actor_type = ?");
+    params.push(actor);
+  }
+  const whereSql = where.length ? `WHERE ${where.join(" AND ")}` : "";
+  const q = `SELECT * FROM system_logs ${whereSql} ORDER BY datetime(created_at) DESC, id DESC LIMIT ?`;
+  const rows = db.prepare(q).all(...params, limit);
   res.json(rows);
 });
 
@@ -462,6 +545,14 @@ app.patch("/api/manager/booking-notify-settings", requireManager, (req, res) => 
   if (!keys.length) return res.status(400).json({ error: "no_fields" });
   const setClause = keys.map((k) => `${k} = @${k}`).join(", ");
   db.prepare(`UPDATE managers SET ${setClause} WHERE id = @id`).run({ ...updates, id: req.auth.sub });
+  writeSystemLog({
+    ...actorFromAuth(req.auth),
+    action: "manager_notify_settings_updated",
+    targetType: "manager",
+    targetId: req.auth.sub,
+    message: "Manager updated booking notification settings",
+    meta: { fields: keys },
+  });
   const m = db
     .prepare(`SELECT email, telegram_bot_token, telegram_chat_id FROM managers WHERE id = ?`)
     .get(req.auth.sub);
@@ -583,6 +674,13 @@ app.patch("/api/manager/reservations/:id", requireManager, (req, res) => {
     .get(id, req.auth.sub);
   if (!row) return res.status(404).json({ error: "not_found" });
   db.prepare(`UPDATE reservations SET status = ? WHERE id = ?`).run(status, id);
+  writeSystemLog({
+    ...actorFromAuth(req.auth),
+    action: "reservation_status_updated",
+    targetType: "reservation",
+    targetId: id,
+    message: `Reservation #${id} status changed to ${status}`,
+  });
   const updated = db
     .prepare(
       `SELECT r.*, b.name_fa AS business_name
@@ -689,6 +787,14 @@ function updateBusinessBySlug(req, res) {
   const setClause = keys.map((k) => `${k} = @${k}`).join(", ");
   const params = { ...updates, where_slug: slug };
   db.prepare(`UPDATE businesses SET ${setClause} WHERE slug = @where_slug`).run(params);
+  writeSystemLog({
+    ...actorFromAuth(auth),
+    action: "business_profile_updated",
+    targetType: "business",
+    targetId: slug,
+    message: `Business profile updated: ${slug}`,
+    meta: { fields: keys },
+  });
   const row = db.prepare(`SELECT * FROM businesses WHERE slug = ?`).get(slug);
   res.json(row);
 }
@@ -825,6 +931,13 @@ async function main() {
 
   app.use((err, _req, res, _next) => {
     console.error(err);
+    writeSystemLog({
+      level: "error",
+      actorType: "system",
+      action: "server_error",
+      message: err?.message || "Unhandled server error",
+      meta: { stack: err?.stack ? String(err.stack).slice(0, 2000) : null },
+    });
     res.status(500).json({ error: "server_error" });
   });
 
